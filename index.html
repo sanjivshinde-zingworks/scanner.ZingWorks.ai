@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>InsightBot at Dreamforce 2026 | ZingWorks</title>
+  <meta name="description" content="Ask your business data anything. InsightBot turns plain-English questions into decision-ready insights. Claim 5 free queries at Dreamforce 2026.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --accent: #0176d3;
+      --accent-600: #0b5cab;
+      --accent-700: #014486;
+      --accent-800: #032d60;
+      --accent-100: #eaf5fe;
+      --accent-200: #90d0fe;
+      --ink: #032d60;
+      --ink-600: #1b3a57;
+      --ink-500: #47576a;
+      --muted: #5a6b7d;
+      --surface: #ffffff;
+      --bg: #f3f8fd;
+      --divider: rgba(3, 45, 96, 0.14);
+      --shadow-md: 0 1px 2px rgba(3, 45, 96, .05), 0 12px 32px rgba(3, 45, 96, .09);
+      --shadow-lg: 0 24px 60px rgba(3, 45, 96, .22);
+      --radius: 14px;
+      --cta-bar-height: 88px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      min-height: 100dvh;
+      padding-bottom: var(--cta-bar-height);
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Salesforce Sans", "Inter", "Segoe UI", Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body.is-locked {
+      overflow: hidden;
+    }
+
+    /* ---------- header ---------- */
+
+    .site-header {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 4px 10px;
+      width: min(1120px, 100%);
+      margin: 0 auto;
+      padding: 16px 20px;
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--ink);
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: -.01em;
+      text-decoration: none;
+    }
+
+    .logo-mark {
+      display: grid;
+      place-items: center;
+      width: 26px;
+      height: 26px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #1b96ff, var(--accent-700));
+      color: #fff;
+      font-size: 14px;
+    }
+
+    .header-meta {
+      margin-left: auto;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .logo-bot {
+      color: var(--accent-600);
+    }
+
+    .header-divider {
+      width: 1px;
+      height: 16px;
+      background: var(--divider);
+    }
+
+    .header-label {
+      color: var(--muted);
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    /* ---------- layout ---------- */
+
+    .page {
+      position: relative;
+      flex: 1 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 20px 20px 32px;
+    }
+
+    .page::before {
+      content: "";
+      position: absolute;
+      top: -180px;
+      left: 50%;
+      width: 760px;
+      height: 520px;
+      transform: translateX(-50%);
+      background: radial-gradient(50% 50% at 50% 50%, rgba(1, 118, 211, .20), transparent 70%);
+      filter: blur(30px);
+      pointer-events: none;
+    }
+
+    .card {
+      position: relative;
+      width: min(1000px, 100%);
+      padding: 44px 52px 40px;
+      border: 1px solid var(--divider);
+      border-radius: 20px;
+      background: var(--surface);
+      box-shadow: var(--shadow-md);
+    }
+
+    /* ---------- hero ---------- */
+
+    .hero {
+      text-align: center;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border: 1px solid rgba(1, 118, 211, .26);
+      border-radius: 99px;
+      background: var(--accent-100);
+      color: var(--accent-700);
+      font-size: 11.5px;
+      font-weight: 600;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    .badge::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    h1 {
+      margin-top: 18px;
+      font-size: clamp(27px, 4.4vw, 44px);
+      font-weight: 700;
+      line-height: 1.13;
+      letter-spacing: -.025em;
+    }
+
+    h1 .brand {
+      background: linear-gradient(135deg, var(--accent-800), var(--accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .subhead {
+      max-width: 56ch;
+      margin: 14px auto 0;
+      color: var(--ink-500);
+      font-family: "Salesforce Sans", "Inter", "Segoe UI", Arial, sans-serif;
+      font-size: clamp(14.5px, 1.7vw, 17px);
+      line-height: 1.55;
+    }
+
+    .offer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 16px;
+      font-size: 14.5px;
+      font-weight: 600;
+    }
+
+    .offer .value {
+      padding: 3px 10px;
+      border-radius: 8px;
+      background: #fff6d6;
+      box-shadow: inset 0 0 0 1px #fcc003;
+      color: var(--accent-800);
+    }
+
+    .offer .rule {
+      width: 16px;
+      height: 1px;
+      background: var(--accent-200);
+    }
+
+    .divider {
+      height: 1px;
+      margin: 34px 0 32px;
+      border: 0;
+      background: linear-gradient(90deg, transparent, var(--divider) 12%, var(--divider) 88%, transparent);
+    }
+
+    /* ---------- questions ---------- */
+
+    .section-label {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--accent-600);
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      font-size: clamp(19px, 2.6vw, 25px);
+      font-weight: 700;
+      letter-spacing: -.02em;
+      line-height: 1.2;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .item {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      min-width: 0;
+      padding: 13px 15px;
+      border: 1px solid var(--divider);
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(234, 245, 254, .75), rgba(255, 255, 255, 0));
+    }
+
+    .item-num {
+      flex: none;
+      color: var(--accent);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .05em;
+    }
+
+    .item p {
+      min-width: 0;
+      color: var(--ink-600);
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 1.35;
+    }
+
+    /* ---------- carousel ---------- */
+
+    .reports {
+      margin-top: 34px;
+      padding-top: 30px;
+      border-top: 1px solid var(--divider);
+    }
+
+    .reports-head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+
+    .carousel-controls {
+      display: flex;
+      flex: none;
+      gap: 8px;
+    }
+
+    .carousel-button {
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      border: 1px solid var(--divider);
+      border-radius: 50%;
+      background: #fff;
+      color: var(--accent-600);
+      cursor: pointer;
+      transition: background .2s ease, color .2s ease, border-color .2s ease;
+    }
+
+    .carousel-button:hover,
+    .carousel-button:focus-visible {
+      border-color: transparent;
+      background: var(--accent);
+      color: #fff;
+      outline: none;
+    }
+
+    .carousel-button svg {
+      width: 17px;
+      height: 17px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .carousel-track {
+      display: flex;
+      gap: 16px;
+      width: 100%;
+      min-width: 0;
+      padding-bottom: 4px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      scrollbar-width: none;
+      overscroll-behavior-x: contain;
+    }
+
+    .carousel-track::-webkit-scrollbar {
+      display: none;
+    }
+
+    .report-card {
+      flex: 0 0 calc((100% - 16px) / 2);
+      min-width: 0;
+      overflow: hidden;
+      padding: 0;
+      border: 1px solid var(--divider);
+      border-radius: var(--radius);
+      background: #fff;
+      color: inherit;
+      font: inherit;
+      text-align: left;
+      cursor: pointer;
+      scroll-snap-align: start;
+      transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+    }
+
+    .report-card:hover,
+    .report-card:focus-visible {
+      transform: translateY(-3px);
+      border-color: rgba(1, 118, 211, .42);
+      box-shadow: var(--shadow-md);
+      outline: none;
+    }
+
+    .report-card img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 440 / 368;
+      object-fit: cover;
+      border-bottom: 1px solid var(--divider);
+    }
+
+    .report-copy {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 14px 13px;
+    }
+
+    .report-copy span {
+      min-width: 0;
+      color: var(--ink-600);
+      font-size: 12.5px;
+      font-weight: 600;
+      line-height: 1.35;
+    }
+
+    .report-open {
+      flex: none;
+      margin-left: auto;
+      color: var(--accent-600);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .carousel-foot {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .carousel-dots {
+      display: flex;
+      gap: 6px;
+    }
+
+    .carousel-dot {
+      width: 7px;
+      height: 7px;
+      padding: 0;
+      border: 0;
+      border-radius: 99px;
+      background: #c3dcf0;
+      cursor: pointer;
+      transition: width .25s ease, background .25s ease;
+    }
+
+    .carousel-dot.is-active {
+      width: 22px;
+      background: var(--accent);
+    }
+
+    .carousel-hint {
+      margin-left: auto;
+      color: var(--muted);
+      font-size: 11.5px;
+    }
+
+    /* ---------- footer ---------- */
+
+    .site-footer {
+      width: min(1000px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 4px 0 28px;
+      color: var(--muted);
+      font-family: "Salesforce Sans", "Inter", "Segoe UI", Arial, sans-serif;
+      font-size: 12px;
+      line-height: 1.55;
+    }
+
+    .footer-rule {
+      margin-bottom: 14px;
+      border: 0;
+      border-top: 1px solid var(--divider);
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 20px;
+      margin-bottom: 9px;
+    }
+
+    .site-footer a {
+      color: var(--ink-600);
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .site-footer a:hover,
+    .site-footer a:focus-visible {
+      color: var(--accent-600);
+      text-decoration: underline;
+    }
+
+    .footer-copy {
+      margin-bottom: 8px;
+    }
+
+    .footer-note {
+      max-width: 88ch;
+      font-size: 10.5px;
+      line-height: 1.5;
+      color: #6b7b8c;
+    }
+
+    /* ---------- sticky CTA ---------- */
+
+    .cta-bar {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 60;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: var(--cta-bar-height);
+      padding: 14px 20px calc(14px + env(safe-area-inset-bottom, 0px));
+      border-top: 1px solid var(--divider);
+      background: rgba(243, 248, 253, .94);
+      backdrop-filter: blur(14px);
+    }
+
+    .cta-inner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      width: min(1000px, 100%);
+    }
+
+    .cta-note {
+      color: var(--ink-500);
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .cta-note b {
+      color: var(--ink);
+    }
+
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 230px;
+      min-height: 50px;
+      padding: 14px 32px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-700));
+      color: #fff;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: .01em;
+      text-decoration: none;
+      box-shadow: 0 10px 24px rgba(1, 118, 211, .30);
+      transition: transform .2s ease, box-shadow .2s ease, filter .2s ease;
+    }
+
+    .cta:hover,
+    .cta:focus-visible {
+      transform: translateY(-1px);
+      filter: saturate(1.08);
+      box-shadow: 0 14px 30px rgba(1, 118, 211, .38);
+      outline: none;
+    }
+
+    .cta:active {
+      transform: translateY(0);
+    }
+
+    /* ---------- report popup ---------- */
+
+    .viewer {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      display: none;
+      padding: 22px;
+      background: rgba(0, 22, 57, .62);
+      backdrop-filter: blur(4px);
+    }
+
+    .viewer.is-open {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .viewer-panel {
+      display: flex;
+      flex-direction: column;
+      width: min(1080px, 100%);
+      height: 100%;
+      max-height: 100%;
+      overflow: hidden;
+      border-radius: 16px;
+      background: #fff;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .viewer-bar {
+      flex: none;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--divider);
+      background: rgba(243, 248, 253, .97);
+    }
+
+    .viewer-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 16px 9px 12px;
+      border: 1px solid var(--divider);
+      border-radius: 10px;
+      background: #fff;
+      color: var(--accent-600);
+      font: inherit;
+      font-size: 13.5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background .2s ease, color .2s ease, border-color .2s ease;
+    }
+
+    .viewer-back:hover,
+    .viewer-back:focus-visible {
+      border-color: transparent;
+      background: var(--accent);
+      color: #fff;
+      outline: none;
+    }
+
+    .viewer-back svg {
+      width: 17px;
+      height: 17px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .viewer-titles {
+      min-width: 0;
+    }
+
+    .viewer-eyebrow {
+      display: block;
+      color: var(--accent-600);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+
+    .viewer-title {
+      display: block;
+      overflow: hidden;
+      color: var(--ink);
+      font-size: 14px;
+      font-weight: 600;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    .viewer-nav {
+      display: flex;
+      flex: none;
+      align-items: center;
+      gap: 8px;
+      margin-left: auto;
+    }
+
+    .viewer-count {
+      min-width: 58px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 600;
+      font-variant-numeric: tabular-nums;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .viewer-dots {
+      display: flex;
+      flex: none;
+      justify-content: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-bottom: 1px solid var(--divider);
+      background: #fff;
+    }
+
+    .viewer-body {
+      flex: 1;
+      min-height: 0;
+      background: #fff;
+      -webkit-overflow-scrolling: touch;
+      overflow: auto;
+    }
+
+    .viewer-body iframe {
+      display: block;
+      width: 100%;
+      height: 100%;
+      min-height: 100%;
+      border: 0;
+    }
+
+    .viewer-body {
+      scrollbar-width: thin;
+      overflow-x: hidden;
+    }
+
+    /* ---------- responsive ---------- */
+
+    @media (max-width: 900px) {
+      .card {
+        padding: 34px 26px 30px;
+      }
+
+      .report-card {
+        flex-basis: calc((100% - 16px) / 2);
+      }
+    }
+
+    @media (max-width: 640px) {
+      :root {
+        --cta-bar-height: 78px;
+      }
+
+      .page {
+        align-items: flex-start;
+        padding: 8px 12px 20px;
+        overflow-x: hidden;
+      }
+
+      .card {
+        width: calc(100vw - 24px);
+        max-width: calc(100vw - 24px);
+        padding: 26px 18px 24px;
+        border-radius: 16px;
+      }
+
+      h1 {
+        margin-top: 14px;
+      }
+
+      .divider {
+        margin: 24px 0 22px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+
+      .reports {
+        margin-top: 26px;
+        padding-top: 22px;
+      }
+
+      .carousel-controls {
+        display: none;
+      }
+
+      .report-card {
+        flex-basis: 92%;
+      }
+
+      .carousel-hint {
+        font-size: 11px;
+      }
+
+      .site-footer {
+        width: calc(100% - 24px);
+      }
+
+      .cta-note,
+      .header-meta {
+        display: none;
+      }
+
+      .cta {
+        width: 100%;
+        min-width: 0;
+      }
+
+      .viewer {
+        padding: 0;
+      }
+
+      .viewer-panel {
+        border-radius: 0;
+      }
+
+      .viewer-title {
+        font-size: 13px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        transition: none !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <a class="logo" href="https://www.zingworks.co/" target="_blank" rel="noopener" aria-label="ZingWorks home">
+      <span class="logo-mark" aria-hidden="true">Z</span>
+      <span>ZingWorks</span>
+      <span class="logo-bot">InsightBot</span>
+    </a>
+    <span class="header-divider" aria-hidden="true"></span>
+    <span class="header-label">Dreamforce 2026</span>
+    <span class="header-meta">Sept 15–17 · San Francisco</span>
+  </header>
+
+  <div class="page">
+    <main class="card">
+      <section class="hero">
+        <span class="badge">Dreamforce 2026 · Limited time offer</span>
+        <h1>What can <span class="brand">InsightBot</span> do for you?</h1>
+        <p class="subhead">
+          Ask questions in plain English and get decision-ready business insights in seconds —
+          no dashboards to build, no SQL to write.
+        </p>
+        <p class="offer">
+          <span class="value">5 free queries · $250 value</span>
+          <span class="rule" aria-hidden="true"></span>
+          <span>Free at booth</span>
+        </p>
+      </section>
+
+      <hr class="divider">
+
+      <section aria-labelledby="questions-title">
+        <span class="section-label">What would you ask?</span>
+        <h2 id="questions-title">Ask your business data anything</h2>
+
+        <div class="grid">
+          <article class="item">
+            <span class="item-num">01</span>
+            <p>What are my biggest revenue opportunities?</p>
+          </article>
+          <article class="item">
+            <span class="item-num">02</span>
+            <p>Why did sales decline last month?</p>
+          </article>
+          <article class="item">
+            <span class="item-num">03</span>
+            <p>Which customers are at risk?</p>
+          </article>
+          <article class="item">
+            <span class="item-num">04</span>
+            <p>Which accounts are showing buying signals?</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="reports" aria-labelledby="reports-title">
+        <div class="reports-head">
+          <div>
+            <span class="section-label">Sample insights</span>
+            <h2 id="reports-title">Real InsightBot analysis, summarised</h2>
+          </div>
+          <div class="carousel-controls">
+            <button class="carousel-button" id="reports-prev" type="button" aria-label="Previous insight">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            </button>
+            <button class="carousel-button" id="reports-next" type="button" aria-label="Next insight">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="carousel-track" id="reports-track" tabindex="0" aria-label="InsightBot report summaries">
+          <button class="report-card" type="button"
+                  data-report="1. Across all NCR ride bookings, where and during which hours are bookings most likely to fail, and what are the main reasons for driver cancellations, c.html"
+                  data-title="Where and when NCR ride bookings fail">
+            <img src="report-thumbnails/report-1.png" alt="Summary: 37.9% of NCR ride bookings fail, driven by 47% driver cancellations" loading="lazy">
+            <span class="report-copy">
+              <span>Ride booking failures by hour and location</span>
+              <span class="report-open">Open</span>
+            </span>
+          </button>
+
+          <button class="report-card" type="button"
+                  data-report="2. How did COVID-19 cases and deaths evolve across countries and continents over time, and which regions experienced the most severe impact after adjusti.html"
+                  data-title="COVID-19 cases and deaths across regions">
+            <img src="report-thumbnails/report-2.png" alt="Summary: COVID-19 peaked at 826,388 daily cases with regional waves" loading="lazy">
+            <span class="report-copy">
+              <span>COVID-19 waves and population-adjusted severity</span>
+              <span class="report-open">Open</span>
+            </span>
+          </button>
+
+          <button class="report-card" type="button"
+                  data-report="3. What are the key sales trends and revenue drivers over time, and which products, customers, and countries contribute the most to overall business perf.html"
+                  data-title="Sales trends and revenue drivers">
+            <img src="report-thumbnails/report-3.png" alt="Summary: revenue peaked at 1.46M in November, up 114% versus August" loading="lazy">
+            <span class="report-copy">
+              <span>Sales trends and the late-year revenue uplift</span>
+              <span class="report-open">Open</span>
+            </span>
+          </button>
+
+          <button class="report-card" type="button"
+                  data-report="4. What factors are most strongly associated with diabetes in this dataset Show me the key findings with charts and figures.html"
+                  data-title="Factors associated with diabetes">
+            <img src="report-thumbnails/report-4.png" alt="Summary: fasting blood sugar and HbA1c most strongly separate diagnosis groups" loading="lazy">
+            <span class="report-copy">
+              <span>Factors most associated with diabetes</span>
+              <span class="report-open">Open</span>
+            </span>
+          </button>
+
+          <button class="report-card" type="button"
+                  data-report="5. Which merchandise products generated the highest sales revenue and unit volume, which products had the highest return or cancellation rates by units a.html"
+                  data-title="Merchandise sales and return exposure">
+            <img src="report-thumbnails/report-5.png" alt="Summary: top-volume products carried up to 100% reversal exposure" loading="lazy">
+            <span class="report-copy">
+              <span>Top sellers hiding reversal risk</span>
+              <span class="report-open">Open</span>
+            </span>
+          </button>
+        </div>
+
+        <div class="carousel-foot">
+          <div class="carousel-dots" id="reports-dots" aria-label="Choose an insight"></div>
+          <span class="carousel-hint">Tap a card to read the full report</span>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <footer class="site-footer">
+    <hr class="footer-rule">
+    <nav class="footer-links" aria-label="Legal">
+      <a href="https://www.zingworks.co/terms-conditions" target="_blank" rel="noopener">Terms &amp; Conditions</a>
+      <a href="https://www.zingworks.co/privacy-policy" target="_blank" rel="noopener">Privacy Policy</a>
+    </nav>
+    <p class="footer-copy">
+      © 2026 <a href="https://www.zingworks.co/" target="_blank" rel="noopener">ZingWorks</a>. All Rights Reserved.
+    </p>
+    <p class="footer-note">
+      *Each email address is entitled to 5 free queries. InsightBot processes your data securely and does not
+      store it after the session. This pass expires on Oct 31, 2026.
+    </p>
+  </footer>
+
+  <div class="cta-bar">
+    <div class="cta-inner">
+      <p class="cta-note"><b>Dreamforce 2026 offer</b> — 5 free queries, $250 value</p>
+      <a class="cta" href="https://zingworks.co/insightbot/claim">Claim my 5 free queries</a>
+    </div>
+  </div>
+
+  <div class="viewer" id="report-viewer" role="dialog" aria-modal="true" aria-labelledby="viewer-title" hidden>
+    <div class="viewer-panel">
+      <div class="viewer-bar">
+        <button class="viewer-back" id="viewer-back" type="button">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          Back
+        </button>
+        <span class="viewer-titles">
+          <span class="viewer-eyebrow">InsightBot report</span>
+          <span class="viewer-title" id="viewer-title">Report</span>
+        </span>
+        <div class="viewer-nav">
+          <button class="carousel-button" id="viewer-prev" type="button" aria-label="Previous report">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          </button>
+          <span class="viewer-count" id="viewer-count">1 of 5</span>
+          <button class="carousel-button" id="viewer-next" type="button" aria-label="Next report">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </button>
+        </div>
+      </div>
+      <div class="viewer-dots" id="viewer-dots" aria-label="Choose a report"></div>
+      <div class="viewer-body">
+        <iframe id="viewer-frame" title="InsightBot report" loading="lazy"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (() => {
+      /* ----- carousel ----- */
+      const track = document.getElementById("reports-track");
+      const cards = Array.from(track.querySelectorAll(".report-card"));
+      const dotsWrap = document.getElementById("reports-dots");
+      let active = 0;
+      let scrollTimer;
+
+      const dots = cards.map((card, i) => {
+        const dot = document.createElement("button");
+        dot.type = "button";
+        dot.className = "carousel-dot" + (i === 0 ? " is-active" : "");
+        dot.setAttribute("aria-label", `Show insight ${i + 1}`);
+        dot.addEventListener("click", () => scrollToCard(i));
+        dotsWrap.append(dot);
+        return dot;
+      });
+
+      const paint = (index) => {
+        active = index;
+        dots.forEach((dot, i) => dot.classList.toggle("is-active", i === index));
+      };
+
+      function scrollToCard(index) {
+        const target = cards[(index + cards.length) % cards.length];
+        track.scrollTo({ left: target.offsetLeft - track.offsetLeft, behavior: "smooth" });
+        paint(cards.indexOf(target));
+      }
+
+      document.getElementById("reports-prev").addEventListener("click", () => scrollToCard(active - 1));
+      document.getElementById("reports-next").addEventListener("click", () => scrollToCard(active + 1));
+
+      track.addEventListener("scroll", () => {
+        clearTimeout(scrollTimer);
+        scrollTimer = setTimeout(() => {
+          const left = track.scrollLeft;
+          const nearest = cards.reduce((best, card, i) => {
+            const offset = Math.abs(card.offsetLeft - track.offsetLeft - left);
+            return offset < best.offset ? { i, offset } : best;
+          }, { i: 0, offset: Infinity }).i;
+          paint(nearest);
+        }, 90);
+      }, { passive: true });
+
+      track.addEventListener("keydown", (event) => {
+        if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+        event.preventDefault();
+        scrollToCard(active + (event.key === "ArrowRight" ? 1 : -1));
+      });
+
+      /* ----- report popup ----- */
+      const viewer = document.getElementById("report-viewer");
+      const frame = document.getElementById("viewer-frame");
+      const viewerTitle = document.getElementById("viewer-title");
+      const viewerCount = document.getElementById("viewer-count");
+      const viewerDotsWrap = document.getElementById("viewer-dots");
+      const back = document.getElementById("viewer-back");
+      let viewerIndex = 0;
+      let lastFocused = null;
+
+      const viewerDots = cards.map((card, i) => {
+        const dot = document.createElement("button");
+        dot.type = "button";
+        dot.className = "carousel-dot";
+        dot.setAttribute("aria-label", `Show report ${i + 1}`);
+        dot.addEventListener("click", () => showReport(i));
+        viewerDotsWrap.append(dot);
+        return dot;
+      });
+
+      const isOpen = () => viewer.classList.contains("is-open");
+
+      function showReport(index) {
+        viewerIndex = (index + cards.length) % cards.length;
+        const card = cards[viewerIndex];
+        viewerTitle.textContent = card.dataset.title;
+        viewerCount.textContent = `${viewerIndex + 1} of ${cards.length}`;
+        frame.src = card.dataset.report;
+        viewerDots.forEach((dot, i) => dot.classList.toggle("is-active", i === viewerIndex));
+      }
+
+      const openReport = (index) => {
+        lastFocused = cards[index];
+        showReport(index);
+        viewer.hidden = false;
+        viewer.classList.add("is-open");
+        document.body.classList.add("is-locked");
+        back.focus();
+      };
+
+      const closeReport = () => {
+        viewer.classList.remove("is-open");
+        viewer.hidden = true;
+        frame.removeAttribute("src");
+        document.body.classList.remove("is-locked");
+        scrollToCard(viewerIndex);
+        if (lastFocused) lastFocused.focus();
+      };
+
+      cards.forEach((card, i) => card.addEventListener("click", () => openReport(i)));
+      back.addEventListener("click", closeReport);
+      document.getElementById("viewer-prev").addEventListener("click", () => showReport(viewerIndex - 1));
+      document.getElementById("viewer-next").addEventListener("click", () => showReport(viewerIndex + 1));
+      viewer.addEventListener("click", (event) => {
+        if (event.target === viewer) closeReport();
+      });
+      document.addEventListener("keydown", (event) => {
+        if (!isOpen()) return;
+        if (event.key === "Escape") closeReport();
+        if (event.key === "ArrowLeft") showReport(viewerIndex - 1);
+        if (event.key === "ArrowRight") showReport(viewerIndex + 1);
+      });
+    })();
+  </script>
+</body>
+</html>

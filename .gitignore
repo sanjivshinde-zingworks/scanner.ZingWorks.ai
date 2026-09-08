@@ -1,0 +1,8 @@
+﻿# Build leftovers — not part of the live site
+tools/
+tools/_qa/
+tools/_cards/
+
+# Source design assets not served by the page
+InisghtBot Card Back (1).png
+InsightBot Pass.dc.html
