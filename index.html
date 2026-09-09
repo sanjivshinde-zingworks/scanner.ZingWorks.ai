@@ -282,7 +282,7 @@
       padding-bottom: 4px;
       overflow-x: auto;
       scroll-snap-type: x mandatory;
-      scroll-behavior: smooth;
+      scroll-behavior: auto;
       scrollbar-width: none;
       overscroll-behavior-x: contain;
     }
@@ -314,14 +314,24 @@
       outline: none;
     }
 
-    /* Card size follows the viewport so the page never needs to scroll. */
+    @media (pointer: coarse) {
+      .report-card:hover,
+      .report-card:focus-visible {
+        transform: none;
+        box-shadow: none;
+      }
+    }
+
+    /* Never paint larger than the file's pixels, or the type goes soft on 3x phones. */
     .report-card img {
       display: block;
-      height: clamp(200px, calc(100dvh - 492px), 470px);
       width: auto;
-      max-width: 100%;
+      height: auto;
+      max-width: min(100%, calc(1122px / var(--dpr, 2)));
+      max-height: clamp(200px, calc(100dvh - 492px), 470px);
       aspect-ratio: 1122 / 1402;
       object-fit: contain;
+      object-position: top center;
     }
 
     .carousel-foot {
@@ -750,37 +760,37 @@
           <button class="report-card" type="button"
                   data-report="01.html"
                   data-title="Late-year sales momentum accelerated sharply through November">
-            <img src="report-thumbnails/01.png" alt="Late-year sales momentum accelerated sharply through November" loading="lazy">
+            <img src="report-thumbnails/01.png" width="1122" height="1402" alt="Late-year sales momentum accelerated sharply through November" loading="eager" decoding="async">
           </button>
 
           <button class="report-card" type="button"
                   data-report="02.html"
                   data-title="The best product opportunities combine value, demand, and sales quality">
-            <img src="report-thumbnails/02.png" alt="The best product opportunities combine value, demand, and sales quality" loading="lazy">
+            <img src="report-thumbnails/02.png" width="1122" height="1402" alt="The best product opportunities combine value, demand, and sales quality" loading="lazy" decoding="async">
           </button>
 
           <button class="report-card" type="button"
                   data-report="03.html"
                   data-title="High-value and high-volume products are not the same commercial signal">
-            <img src="report-thumbnails/03.png" alt="High-value and high-volume products are not the same commercial signal" loading="lazy">
+            <img src="report-thumbnails/03.png" width="1122" height="1402" alt="High-value and high-volume products are not the same commercial signal" loading="lazy" decoding="async">
           </button>
 
           <button class="report-card" type="button"
                   data-report="04.html"
                   data-title="Sales performance is broad across the product portfolio">
-            <img src="report-thumbnails/04.png" alt="Sales performance is broad across the product portfolio" loading="lazy">
+            <img src="report-thumbnails/04.png" width="1122" height="1402" alt="Sales performance is broad across the product portfolio" loading="lazy" decoding="async">
           </button>
 
           <button class="report-card" type="button"
                   data-report="06.html"
                   data-title="Operational exposure peaks in the early evening">
-            <img src="report-thumbnails/06.png" alt="Operational exposure peaks in the early evening" loading="lazy">
+            <img src="report-thumbnails/06.png" width="1122" height="1402" alt="Operational exposure peaks in the early evening" loading="lazy" decoding="async">
           </button>
 
           <button class="report-card" type="button"
                   data-report="07.html"
                   data-title="Glycemic measures are the clearest first-line signals">
-            <img src="report-thumbnails/07.png" alt="Glycemic measures are the clearest first-line signals" loading="lazy">
+            <img src="report-thumbnails/07.png" width="1122" height="1402" alt="Glycemic measures are the clearest first-line signals" loading="lazy" decoding="async">
           </button>
         </div>
 
@@ -843,63 +853,85 @@
 
   <script>
     (() => {
+      document.documentElement.style.setProperty(
+        "--dpr",
+        String(Math.max(1, window.devicePixelRatio || 2))
+      );
+
       /* ----- carousel ----- */
       const track = document.getElementById("reports-track");
       const cards = Array.from(track.querySelectorAll(".report-card"));
-      cards.forEach((card) => {
-        const clone = card.cloneNode(true);
-        clone.setAttribute("aria-hidden", "true");
-        clone.tabIndex = -1;
-        track.append(clone);
-      });
-      const slides = Array.from(track.querySelectorAll(".report-card"));
+      const firstClone = cards[0].cloneNode(true);
+      firstClone.setAttribute("aria-hidden", "true");
+      firstClone.tabIndex = -1;
+      track.append(firstClone);
+      const slides = cards.concat(firstClone);
+      const n = cards.length;
       const dotsWrap = document.getElementById("reports-dots");
       let active = 0;
       let slide = 0;
       let scrollTimer;
       let wrapTimer;
+      let jumping = false;
 
       const dots = cards.map((card, i) => {
         const dot = document.createElement("button");
         dot.type = "button";
         dot.className = "carousel-dot" + (i === 0 ? " is-active" : "");
         dot.setAttribute("aria-label", `Show insight ${i + 1}`);
-        dot.addEventListener("click", () => scrollToCard(i));
+        dot.addEventListener("click", () => goTo(i));
         dotsWrap.append(dot);
         return dot;
       });
 
       const paint = (index) => {
-        active = index;
-        dots.forEach((dot, i) => dot.classList.toggle("is-active", i === index));
+        active = ((index % n) + n) % n;
+        dots.forEach((dot, i) => dot.classList.toggle("is-active", i === active));
       };
 
-      function scrollToCard(index, behavior = "smooth") {
-        const n = cards.length;
-        slide = ((index % n) + n) % n;
-        const target = slides[slide];
-        track.scrollTo({ left: target.offsetLeft - track.offsetLeft, behavior });
-        paint(slide);
+      const offsetOf = (el) => el.offsetLeft - track.offsetLeft;
+
+      function silentJump(index) {
+        jumping = true;
+        const snap = track.style.scrollSnapType;
+        track.style.scrollSnapType = "none";
+        slide = index;
+        track.scrollLeft = offsetOf(slides[index]);
+        paint(index);
+        requestAnimationFrame(() => {
+          track.style.scrollSnapType = snap;
+          jumping = false;
+        });
+      }
+
+      function goTo(index, behavior = "smooth") {
+        clearTimeout(wrapTimer);
+        const next = ((index % n) + n) % n;
+        slide = next;
+        track.scrollTo({ left: offsetOf(slides[next]), behavior });
+        paint(next);
       }
 
       function advanceRound() {
         clearTimeout(wrapTimer);
-        const n = cards.length;
-        slide += 1;
-        const target = slides[slide];
-        track.scrollTo({ left: target.offsetLeft - track.offsetLeft, behavior: "smooth" });
-        paint(slide % n);
-        if (slide >= n) {
-          wrapTimer = setTimeout(() => {
-            slide = 0;
-            track.scrollTo({ left: slides[0].offsetLeft - track.offsetLeft, behavior: "auto" });
-            paint(0);
-          }, 520);
+        const next = slide + 1;
+        if (next < n) {
+          slide = next;
+          track.scrollTo({ left: offsetOf(slides[slide]), behavior: "smooth" });
+          paint(slide);
+          return;
         }
+        slide = n;
+        track.scrollTo({ left: offsetOf(slides[n]), behavior: "smooth" });
+        paint(0);
+        wrapTimer = setTimeout(() => silentJump(0), 420);
       }
 
-      document.getElementById("reports-prev").addEventListener("click", () => scrollToCard(active - 1));
-      document.getElementById("reports-next").addEventListener("click", () => scrollToCard(active + 1));
+      document.getElementById("reports-prev").addEventListener("click", () => goTo(active - 1));
+      document.getElementById("reports-next").addEventListener("click", () => {
+        if (active === n - 1) advanceRound();
+        else goTo(active + 1);
+      });
 
       const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       let autoplay = null;
@@ -922,22 +954,24 @@
       track.addEventListener("focusout", startAutoplay);
 
       track.addEventListener("scroll", () => {
+        if (jumping) return;
         clearTimeout(scrollTimer);
         scrollTimer = setTimeout(() => {
           const left = track.scrollLeft;
           const nearest = slides.reduce((best, card, i) => {
-            const offset = Math.abs(card.offsetLeft - track.offsetLeft - left);
+            const offset = Math.abs(offsetOf(card) - left);
             return offset < best.offset ? { i, offset } : best;
           }, { i: 0, offset: Infinity }).i;
-          paint(nearest % cards.length);
-          slide = nearest % cards.length;
+          slide = nearest;
+          paint(nearest);
         }, 90);
       }, { passive: true });
 
       track.addEventListener("keydown", (event) => {
         if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
         event.preventDefault();
-        scrollToCard(active + (event.key === "ArrowRight" ? 1 : -1));
+        if (event.key === "ArrowRight" && active === n - 1) advanceRound();
+        else goTo(active + (event.key === "ArrowRight" ? 1 : -1));
       });
 
       /* ----- report popup ----- */
@@ -986,7 +1020,7 @@
         viewer.hidden = true;
         frame.removeAttribute("src");
         document.body.classList.remove("is-locked");
-        scrollToCard(viewerIndex);
+        goTo(viewerIndex, "auto");
         if (lastFocused) lastFocused.focus();
         startAutoplay();
       };
