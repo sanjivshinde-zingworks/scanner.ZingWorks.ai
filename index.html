@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>InsightBot | ZingWorks</title>
   <meta name="description" content="Ask your business data anything. InsightBot turns plain-English questions into decision-ready insights. Claim 5 free queries.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -323,12 +323,11 @@
       }
     }
 
-    /* Never paint larger than the file's pixels, or the type goes soft on 3x phones. */
     .report-card img {
       display: block;
       width: auto;
       height: auto;
-      max-width: min(100%, calc(1122px / var(--dpr, 2)));
+      max-width: 100%;
       max-height: clamp(200px, calc(100dvh - 492px), 470px);
       aspect-ratio: 1122 / 1402;
       object-fit: contain;
@@ -648,7 +647,7 @@
 
     /* ---------- responsive ---------- */
 
-    @media (max-width: 900px) {
+    @media (max-width: 1100px) {
       html, body {
         height: 100svh;
         max-height: 100svh;
@@ -673,6 +672,8 @@
         flex: 1 1 auto;
         align-items: stretch;
         min-height: 0;
+        width: 100%;
+        max-width: 100%;
         padding: 4px 10px 8px;
         overflow: hidden;
       }
@@ -680,10 +681,11 @@
       .card {
         display: flex;
         flex-direction: column;
-        width: 100%;
-        max-width: 100%;
+        width: calc(100vw - 20px);
+        max-width: calc(100vw - 20px);
         height: 100%;
         min-height: 0;
+        margin-inline: auto;
         padding: 14px 12px 12px;
         overflow: hidden;
         border: 1px solid var(--divider);
@@ -733,7 +735,7 @@
       .report-card img {
         width: 100%;
         max-width: 100%;
-        height: 100%;
+        height: auto;
         max-height: 100%;
         aspect-ratio: 1122 / 1402;
         object-fit: contain;
