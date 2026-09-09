@@ -283,7 +283,7 @@
     }
 
     .report-card {
-      flex: 0 0 calc((100% - 24px) / 3);
+      flex: 0 0 auto;
       min-width: 0;
       overflow: hidden;
       padding: 0;
@@ -305,11 +305,14 @@
       outline: none;
     }
 
+    /* Card size follows the viewport so the page never needs to scroll. */
     .report-card img {
       display: block;
-      width: 100%;
+      height: clamp(200px, calc(100dvh - 492px), 470px);
+      width: auto;
+      max-width: 100%;
       aspect-ratio: 1122 / 1402;
-      object-fit: cover;
+      object-fit: contain;
     }
 
     .carousel-foot {
@@ -612,10 +615,6 @@
       .card {
         padding: 22px 22px 18px;
       }
-
-      .report-card {
-        flex-basis: calc((100% - 12px) / 2);
-      }
     }
 
     @media (max-width: 640px) {
@@ -643,10 +642,6 @@
 
       .carousel-controls {
         display: none;
-      }
-
-      .report-card {
-        flex-basis: 92%;
       }
 
       .carousel-hint {
