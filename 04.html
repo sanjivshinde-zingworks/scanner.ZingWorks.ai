@@ -27,7 +27,7 @@ table.callout{border-collapse:separate;border-spacing:0;width:100%;background:va
 figure{margin:15px 0 22px}img{max-width:100%;height:auto;display:block;margin:12px auto;border:1px solid #d9e3f1;border-radius:5px}figcaption{font-size:12.5px;color:var(--muted);line-height:1.4;margin-top:6px;text-align:center;font-style:italic}
 blockquote{margin:12px 0;padding:12px 16px;background:var(--light);border-left:4px solid var(--blue);color:var(--ink)}
 .report-footer{border-top:1px solid #dce5f0;padding:16px 34px 19px;color:#748095;font-size:12.5px;display:flex;justify-content:space-between;gap:12px;background:#fbfcfe}
-@media(max-width:700px){body{padding:0;background:#fff}.report-shell{border-radius:0;box-shadow:none}.report-topbar{padding:16px 20px;align-items:flex-start;flex-direction:column;gap:3px}.report-content{padding:25px 20px 34px}.title{font-size:27px!important}h1:not(.title){font-size:20px}table{display:block;overflow-x:auto;white-space:normal}.report-footer{padding:14px 20px;flex-direction:column}}
+@media(max-width:700px){body{padding:0;background:#fff}.report-shell{border-radius:0;box-shadow:none}.report-topbar{padding:16px 20px;align-items:flex-start;flex-direction:column;gap:3px}.report-content{padding:25px 20px 34px}.title{font-size:27px!important}h1:not(.title){font-size:20px}table:not(.callout){max-width:100%}.report-footer{padding:14px 20px;flex-direction:column}}
 @media print{@page{size:A4;margin:15mm}html,body{background:#fff}body{padding:0}.report-shell{box-shadow:none;border-radius:0;width:100%;overflow:visible}.report-topbar{background:#003DA5!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;padding:12px 18px}.report-content{padding:18px 0 0}.report-footer{display:none}.title{font-size:25px!important}h1:not(.title){font-size:18px;page-break-after:avoid}h2,h3{page-break-after:avoid}p,li{font-size:11px}table{font-size:10px;page-break-inside:auto}thead{display:table-header-group}tr{page-break-inside:avoid}th{background:#003DA5!important;color:#fff!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}table.callout,table.callout td,table.callout th{background:#EEF4FB!important;color:#202124!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}img,figure{page-break-inside:avoid}}
 </style><style id="zw-responsive">
 html {
@@ -72,13 +72,17 @@ img, svg, canvas, figure {
   h3 { font-size: 1.02rem !important; }
   p, li, .note, .section-intro { font-size: 15px !important; }
   .callout, table.callout td, table.callout th { font-size: 15px !important; padding: 14px 16px !important; }
-  table, .header-meta, .mck-header-top-table, .mck-insight-table {
+  .header-meta, .mck-header-top-table {
     width: 100% !important;
     max-width: 100% !important;
     table-layout: fixed !important;
     font-size: 13px !important;
   }
-  th, td {
+  table:not(.callout):not(.header-meta):not(.mck-header-top-table) {
+    font-size: 13px !important;
+  }
+  .header-meta th, .header-meta td,
+  .mck-header-top-table th, .mck-header-top-table td {
     white-space: normal !important;
     word-break: break-word !important;
     overflow-wrap: anywhere !important;
@@ -92,6 +96,35 @@ img, svg, canvas, figure {
     white-space: normal !important;
   }
   * { min-width: 0 !important; }
+}
+
+.table-scroll {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+  margin: 12px 0 18px;
+}
+.table-scroll table {
+  display: table !important;
+  width: max-content !important;
+  min-width: 100% !important;
+  max-width: none !important;
+  table-layout: auto !important;
+  margin: 0 !important;
+}
+.table-scroll th,
+.table-scroll td {
+  white-space: nowrap !important;
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+  min-width: max-content !important;
+}
+table.callout {
+  display: table !important;
+  width: 100% !important;
+  max-width: 100% !important;
 }
 </style>
 </head>
@@ -238,5 +271,23 @@ merchandise reversal exposure. It preserves source metrics and known
 limits and does not infer account/customer rankings, country rankings,
 profit, causal return reasons, or Salesforce pipeline fields not present
 in the supplied evidence.</p>
-</main><div class="report-footer"><span>InsightBot Deep Analysis</span><span>Sales-function evidence summary</span></div></div></body>
+</main><div class="report-footer"><span>InsightBot Deep Analysis</span><span>Sales-function evidence summary</span></div></div><script id="zw-table-scroll">
+(function () {
+  var skip = ["callout", "header-meta", "mck-header-top-table"];
+  document.querySelectorAll("table").forEach(function (table) {
+    for (var i = 0; i < skip.length; i++) {
+      if (table.classList.contains(skip[i])) return;
+    }
+    if (table.parentElement && table.parentElement.classList.contains("table-scroll")) return;
+    var wrap = document.createElement("div");
+    wrap.className = "table-scroll";
+    wrap.setAttribute("role", "region");
+    wrap.setAttribute("tabindex", "0");
+    wrap.setAttribute("aria-label", "Scrollable table");
+    table.parentNode.insertBefore(wrap, table);
+    wrap.appendChild(table);
+  });
+})();
+</script>
+</body>
 </html>

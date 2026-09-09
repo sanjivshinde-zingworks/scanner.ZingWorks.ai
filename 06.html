@@ -392,13 +392,17 @@ img, svg, canvas, figure {
   max-width: 100% !important;
   height: auto !important;
 }
-table, .header-meta, .mck-header-top-table, .mck-insight-table {
+.header-meta, .mck-header-top-table {
   width: 100% !important;
   max-width: 100% !important;
   table-layout: fixed !important;
   font-size: 13px !important;
 }
-th, td {
+table:not(.callout):not(.header-meta):not(.mck-header-top-table) {
+  font-size: 13px !important;
+}
+.header-meta th, .header-meta td,
+.mck-header-top-table th, .mck-header-top-table td {
   white-space: normal !important;
   word-break: break-word !important;
   overflow-wrap: anywhere !important;
@@ -412,6 +416,35 @@ th, td {
   white-space: normal !important;
 }
 * { min-width: 0 !important; }
+
+.table-scroll {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+  margin: 12px 0 18px;
+}
+.table-scroll table {
+  display: table !important;
+  width: max-content !important;
+  min-width: 100% !important;
+  max-width: none !important;
+  table-layout: auto !important;
+  margin: 0 !important;
+}
+.table-scroll th,
+.table-scroll td {
+  white-space: nowrap !important;
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+  min-width: max-content !important;
+}
+table.callout {
+  display: table !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
 </style>
 </head>
 <body>
@@ -551,5 +584,23 @@ th, td {
 </ul>
 </section>
 </div>
+<script id="zw-table-scroll">
+(function () {
+  var skip = ["callout", "header-meta", "mck-header-top-table"];
+  document.querySelectorAll("table").forEach(function (table) {
+    for (var i = 0; i < skip.length; i++) {
+      if (table.classList.contains(skip[i])) return;
+    }
+    if (table.parentElement && table.parentElement.classList.contains("table-scroll")) return;
+    var wrap = document.createElement("div");
+    wrap.className = "table-scroll";
+    wrap.setAttribute("role", "region");
+    wrap.setAttribute("tabindex", "0");
+    wrap.setAttribute("aria-label", "Scrollable table");
+    table.parentNode.insertBefore(wrap, table);
+    wrap.appendChild(table);
+  });
+})();
+</script>
 </body>
 </html>
