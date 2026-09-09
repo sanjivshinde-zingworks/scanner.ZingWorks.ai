@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>InsightBot at Dreamforce 2026 | ZingWorks</title>
-  <meta name="description" content="Ask your business data anything. InsightBot turns plain-English questions into decision-ready insights. Claim 5 free queries at Dreamforce 2026.">
+  <title>InsightBot | ZingWorks</title>
+  <meta name="description" content="Ask your business data anything. InsightBot turns plain-English questions into decision-ready insights. Claim 5 free queries.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -26,7 +26,7 @@
       --shadow-md: 0 1px 2px rgba(3, 45, 96, .05), 0 12px 32px rgba(3, 45, 96, .09);
       --shadow-lg: 0 24px 60px rgba(3, 45, 96, .22);
       --radius: 14px;
-      --cta-bar-height: 88px;
+      --cta-bar-height: 70px;
     }
 
     * {
@@ -67,7 +67,7 @@
       gap: 4px 10px;
       width: min(1120px, 100%);
       margin: 0 auto;
-      padding: 16px 20px;
+      padding: 10px 20px;
     }
 
     .logo {
@@ -92,29 +92,8 @@
       font-size: 14px;
     }
 
-    .header-meta {
-      margin-left: auto;
-      color: var(--muted);
-      font-size: 12px;
-      font-weight: 500;
-    }
-
     .logo-bot {
       color: var(--accent-600);
-    }
-
-    .header-divider {
-      width: 1px;
-      height: 16px;
-      background: var(--divider);
-    }
-
-    .header-label {
-      color: var(--muted);
-      font-size: 10.5px;
-      font-weight: 600;
-      letter-spacing: .14em;
-      text-transform: uppercase;
     }
 
     /* ---------- layout ---------- */
@@ -126,7 +105,7 @@
       align-items: center;
       justify-content: center;
       width: 100%;
-      padding: 20px 20px 32px;
+      padding: 10px 20px 14px;
     }
 
     .page::before {
@@ -144,8 +123,8 @@
 
     .card {
       position: relative;
-      width: min(1000px, 100%);
-      padding: 44px 52px 40px;
+      width: min(1060px, 100%);
+      padding: 24px 30px 20px;
       border: 1px solid var(--divider);
       border-radius: 20px;
       background: var(--surface);
@@ -158,34 +137,11 @@
       text-align: center;
     }
 
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 14px;
-      border: 1px solid rgba(1, 118, 211, .26);
-      border-radius: 99px;
-      background: var(--accent-100);
-      color: var(--accent-700);
-      font-size: 11.5px;
-      font-weight: 600;
-      letter-spacing: .06em;
-      text-transform: uppercase;
-    }
-
-    .badge::before {
-      content: "";
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--accent);
-    }
-
     h1 {
-      margin-top: 18px;
-      font-size: clamp(27px, 4.4vw, 44px);
+      margin-top: 0;
+      font-size: clamp(22px, 3.2vw, 33px);
       font-weight: 700;
-      line-height: 1.13;
+      line-height: 1.1;
       letter-spacing: -.025em;
     }
 
@@ -196,104 +152,71 @@
       -webkit-text-fill-color: transparent;
     }
 
+    .offer-kicker {
+      margin-top: 5px;
+      color: #6b7b8c;
+      font-size: 10.5px;
+      font-weight: 500;
+      letter-spacing: .01em;
+    }
+
+    .offer-kicker a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .offer-kicker a:hover {
+      text-decoration: underline;
+    }
+
     .subhead {
-      max-width: 56ch;
-      margin: 14px auto 0;
+      max-width: 62ch;
+      margin: 7px auto 0;
       color: var(--ink-500);
       font-family: "Salesforce Sans", "Inter", "Segoe UI", Arial, sans-serif;
-      font-size: clamp(14.5px, 1.7vw, 17px);
-      line-height: 1.55;
+      font-size: clamp(13px, 1.4vw, 15px);
+      line-height: 1.4;
     }
 
     .offer {
-      display: flex;
+      display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
-      margin-top: 16px;
-      font-size: 14.5px;
-      font-weight: 600;
+      margin-top: 10px;
     }
 
     .offer .value {
-      padding: 3px 10px;
-      border-radius: 8px;
+      padding: 4px 12px;
+      border-radius: 99px;
       background: #fff6d6;
       box-shadow: inset 0 0 0 1px #fcc003;
       color: var(--accent-800);
+      font-size: 13px;
+      font-weight: 600;
     }
 
-    .offer .rule {
-      width: 16px;
-      height: 1px;
-      background: var(--accent-200);
-    }
-
-    .divider {
-      height: 1px;
-      margin: 34px 0 32px;
-      border: 0;
-      background: linear-gradient(90deg, transparent, var(--divider) 12%, var(--divider) 88%, transparent);
-    }
-
-    /* ---------- questions ---------- */
+    /* ---------- sample insights ---------- */
 
     .section-label {
       display: block;
-      margin-bottom: 6px;
+      margin-bottom: 3px;
       color: var(--accent-600);
-      font-size: 10.5px;
+      font-size: 10px;
       font-weight: 700;
       letter-spacing: .14em;
       text-transform: uppercase;
     }
 
     h2 {
-      font-size: clamp(19px, 2.6vw, 25px);
+      font-size: clamp(16px, 1.9vw, 20px);
       font-weight: 700;
       letter-spacing: -.02em;
       line-height: 1.2;
     }
 
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-top: 16px;
-    }
-
-    .item {
-      display: flex;
-      align-items: center;
-      gap: 13px;
-      min-width: 0;
-      padding: 13px 15px;
-      border: 1px solid var(--divider);
-      border-radius: var(--radius);
-      background: linear-gradient(180deg, rgba(234, 245, 254, .75), rgba(255, 255, 255, 0));
-    }
-
-    .item-num {
-      flex: none;
-      color: var(--accent);
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: .05em;
-    }
-
-    .item p {
-      min-width: 0;
-      color: var(--ink-600);
-      font-size: 14px;
-      font-weight: 500;
-      line-height: 1.35;
-    }
-
-    /* ---------- carousel ---------- */
-
     .reports {
-      margin-top: 34px;
-      padding-top: 30px;
+      margin-top: 16px;
+      padding-top: 14px;
       border-top: 1px solid var(--divider);
     }
 
@@ -302,7 +225,7 @@
       align-items: flex-end;
       justify-content: space-between;
       gap: 18px;
-      margin-bottom: 18px;
+      margin-bottom: 10px;
     }
 
     .carousel-controls {
@@ -314,8 +237,8 @@
     .carousel-button {
       display: grid;
       place-items: center;
-      width: 38px;
-      height: 38px;
+      width: 32px;
+      height: 32px;
       border: 1px solid var(--divider);
       border-radius: 50%;
       background: #fff;
@@ -344,7 +267,7 @@
 
     .carousel-track {
       display: flex;
-      gap: 16px;
+      gap: 12px;
       width: 100%;
       min-width: 0;
       padding-bottom: 4px;
@@ -360,25 +283,24 @@
     }
 
     .report-card {
-      flex: 0 0 calc((100% - 16px) / 2);
+      flex: 0 0 calc((100% - 24px) / 3);
       min-width: 0;
       overflow: hidden;
       padding: 0;
-      border: 1px solid var(--divider);
-      border-radius: var(--radius);
-      background: #fff;
+      border: 0;
+      border-radius: 18px;
+      background: transparent;
       color: inherit;
       font: inherit;
       text-align: left;
       cursor: pointer;
       scroll-snap-align: start;
-      transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+      transition: transform .22s ease, box-shadow .22s ease;
     }
 
     .report-card:hover,
     .report-card:focus-visible {
       transform: translateY(-3px);
-      border-color: rgba(1, 118, 211, .42);
       box-shadow: var(--shadow-md);
       outline: none;
     }
@@ -386,42 +308,15 @@
     .report-card img {
       display: block;
       width: 100%;
-      aspect-ratio: 440 / 368;
+      aspect-ratio: 1122 / 1402;
       object-fit: cover;
-      border-bottom: 1px solid var(--divider);
-    }
-
-    .report-copy {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 12px 14px 13px;
-    }
-
-    .report-copy span {
-      min-width: 0;
-      color: var(--ink-600);
-      font-size: 12.5px;
-      font-weight: 600;
-      line-height: 1.35;
-    }
-
-    .report-open {
-      flex: none;
-      margin-left: auto;
-      color: var(--accent-600);
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: .04em;
-      text-transform: uppercase;
-      white-space: nowrap;
     }
 
     .carousel-foot {
       display: flex;
       align-items: center;
       gap: 12px;
-      margin-top: 16px;
+      margin-top: 9px;
     }
 
     .carousel-dots {
@@ -454,17 +349,17 @@
     /* ---------- footer ---------- */
 
     .site-footer {
-      width: min(1000px, calc(100% - 40px));
+      width: min(1060px, calc(100% - 40px));
       margin: 0 auto;
-      padding: 4px 0 28px;
+      padding: 0 0 12px;
       color: var(--muted);
       font-family: "Salesforce Sans", "Inter", "Segoe UI", Arial, sans-serif;
-      font-size: 12px;
-      line-height: 1.55;
+      font-size: 11.5px;
+      line-height: 1.45;
     }
 
     .footer-rule {
-      margin-bottom: 14px;
+      margin-bottom: 8px;
       border: 0;
       border-top: 1px solid var(--divider);
     }
@@ -472,8 +367,8 @@
     .footer-links {
       display: flex;
       flex-wrap: wrap;
-      gap: 6px 20px;
-      margin-bottom: 9px;
+      gap: 4px 18px;
+      margin-bottom: 4px;
     }
 
     .site-footer a {
@@ -489,13 +384,13 @@
     }
 
     .footer-copy {
-      margin-bottom: 8px;
+      margin-bottom: 3px;
     }
 
     .footer-note {
-      max-width: 88ch;
-      font-size: 10.5px;
-      line-height: 1.5;
+      max-width: 96ch;
+      font-size: 10px;
+      line-height: 1.4;
       color: #6b7b8c;
     }
 
@@ -511,7 +406,7 @@
       align-items: center;
       justify-content: center;
       min-height: var(--cta-bar-height);
-      padding: 14px 20px calc(14px + env(safe-area-inset-bottom, 0px));
+      padding: 10px 20px calc(10px + env(safe-area-inset-bottom, 0px));
       border-top: 1px solid var(--divider);
       background: rgba(243, 248, 253, .94);
       backdrop-filter: blur(14px);
@@ -539,13 +434,13 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-width: 230px;
-      min-height: 50px;
-      padding: 14px 32px;
+      min-width: 220px;
+      min-height: 44px;
+      padding: 11px 28px;
       border-radius: 12px;
       background: linear-gradient(135deg, var(--accent), var(--accent-700));
       color: #fff;
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 700;
       letter-spacing: .01em;
       text-decoration: none;
@@ -715,48 +610,35 @@
 
     @media (max-width: 900px) {
       .card {
-        padding: 34px 26px 30px;
+        padding: 22px 22px 18px;
       }
 
       .report-card {
-        flex-basis: calc((100% - 16px) / 2);
+        flex-basis: calc((100% - 12px) / 2);
       }
     }
 
     @media (max-width: 640px) {
       :root {
-        --cta-bar-height: 78px;
+        --cta-bar-height: 64px;
       }
 
       .page {
         align-items: flex-start;
-        padding: 8px 12px 20px;
+        padding: 6px 12px 10px;
         overflow-x: hidden;
       }
 
       .card {
         width: calc(100vw - 24px);
         max-width: calc(100vw - 24px);
-        padding: 26px 18px 24px;
+        padding: 18px 14px 14px;
         border-radius: 16px;
       }
 
-      h1 {
-        margin-top: 14px;
-      }
-
-      .divider {
-        margin: 24px 0 22px;
-      }
-
-      .grid {
-        grid-template-columns: 1fr;
-        gap: 10px;
-      }
-
       .reports {
-        margin-top: 26px;
-        padding-top: 22px;
+        margin-top: 12px;
+        padding-top: 12px;
       }
 
       .carousel-controls {
@@ -775,8 +657,7 @@
         width: calc(100% - 24px);
       }
 
-      .cta-note,
-      .header-meta {
+      .cta-note {
         display: none;
       }
 
@@ -813,51 +694,19 @@
       <span>ZingWorks</span>
       <span class="logo-bot">InsightBot</span>
     </a>
-    <span class="header-divider" aria-hidden="true"></span>
-    <span class="header-label">Dreamforce 2026</span>
-    <span class="header-meta">Sept 15–17 · San Francisco</span>
   </header>
 
   <div class="page">
     <main class="card">
       <section class="hero">
-        <span class="badge">Dreamforce 2026 · Limited time offer</span>
         <h1>What can <span class="brand">InsightBot</span> do for you?</h1>
         <p class="subhead">
-          Ask questions in plain English and get decision-ready business insights in seconds —
-          no dashboards to build, no SQL to write.
+          Ask questions in plain English and get decision-ready business insights.
         </p>
         <p class="offer">
-          <span class="value">5 free queries · $250 value</span>
-          <span class="rule" aria-hidden="true"></span>
-          <span>Free at booth</span>
+          <span class="value">5 free queries · $250 value*</span>
         </p>
-      </section>
-
-      <hr class="divider">
-
-      <section aria-labelledby="questions-title">
-        <span class="section-label">What would you ask?</span>
-        <h2 id="questions-title">Ask your business data anything</h2>
-
-        <div class="grid">
-          <article class="item">
-            <span class="item-num">01</span>
-            <p>What are my biggest revenue opportunities?</p>
-          </article>
-          <article class="item">
-            <span class="item-num">02</span>
-            <p>Why did sales decline last month?</p>
-          </article>
-          <article class="item">
-            <span class="item-num">03</span>
-            <p>Which customers are at risk?</p>
-          </article>
-          <article class="item">
-            <span class="item-num">04</span>
-            <p>Which accounts are showing buying signals?</p>
-          </article>
-        </div>
+        <p class="offer-kicker"><a href="#offer-terms">*Limited-time offer</a></p>
       </section>
 
       <section class="reports" aria-labelledby="reports-title">
@@ -878,53 +727,33 @@
 
         <div class="carousel-track" id="reports-track" tabindex="0" aria-label="InsightBot report summaries">
           <button class="report-card" type="button"
-                  data-report="1. Across all NCR ride bookings, where and during which hours are bookings most likely to fail, and what are the main reasons for driver cancellations, c.html"
-                  data-title="Where and when NCR ride bookings fail">
-            <img src="report-thumbnails/report-1.png" alt="Summary: 37.9% of NCR ride bookings fail, driven by 47% driver cancellations" loading="lazy">
-            <span class="report-copy">
-              <span>Ride booking failures by hour and location</span>
-              <span class="report-open">Open</span>
-            </span>
+                  data-report="4. What factors are most strongly associated with diabetes in this dataset Show me the key findings with charts and figures.html"
+                  data-title="High-value customer momentum">
+            <img src="report-thumbnails/sales-customer-momentum.png" alt="High-value customer momentum accelerated through the year" loading="lazy">
           </button>
 
           <button class="report-card" type="button"
                   data-report="2. How did COVID-19 cases and deaths evolve across countries and continents over time, and which regions experienced the most severe impact after adjusti.html"
-                  data-title="COVID-19 cases and deaths across regions">
-            <img src="report-thumbnails/report-2.png" alt="Summary: COVID-19 peaked at 826,388 daily cases with regional waves" loading="lazy">
-            <span class="report-copy">
-              <span>COVID-19 waves and population-adjusted severity</span>
-              <span class="report-open">Open</span>
-            </span>
+                  data-title="Operational exposure in the evening">
+            <img src="report-thumbnails/operational-evening-peak.png" alt="Operational exposure peaks in the early evening" loading="lazy">
           </button>
 
           <button class="report-card" type="button"
-                  data-report="3. What are the key sales trends and revenue drivers over time, and which products, customers, and countries contribute the most to overall business perf.html"
-                  data-title="Sales trends and revenue drivers">
-            <img src="report-thumbnails/report-3.png" alt="Summary: revenue peaked at 1.46M in November, up 114% versus August" loading="lazy">
-            <span class="report-copy">
-              <span>Sales trends and the late-year revenue uplift</span>
-              <span class="report-open">Open</span>
-            </span>
-          </button>
-
-          <button class="report-card" type="button"
-                  data-report="4. What factors are most strongly associated with diabetes in this dataset Show me the key findings with charts and figures.html"
-                  data-title="Factors associated with diabetes">
-            <img src="report-thumbnails/report-4.png" alt="Summary: fasting blood sugar and HbA1c most strongly separate diagnosis groups" loading="lazy">
-            <span class="report-copy">
-              <span>Factors most associated with diabetes</span>
-              <span class="report-open">Open</span>
-            </span>
+                  data-report="1. Across all NCR ride bookings, where and during which hours are bookings most likely to fail, and what are the main reasons for driver cancellations, c.html"
+                  data-title="Product reversal risk">
+            <img src="report-thumbnails/product-reversal-risk.png" alt="High-demand products with unusual reversal risk" loading="lazy">
           </button>
 
           <button class="report-card" type="button"
                   data-report="5. Which merchandise products generated the highest sales revenue and unit volume, which products had the highest return or cancellation rates by units a.html"
-                  data-title="Merchandise sales and return exposure">
-            <img src="report-thumbnails/report-5.png" alt="Summary: top-volume products carried up to 100% reversal exposure" loading="lazy">
-            <span class="report-copy">
-              <span>Top sellers hiding reversal risk</span>
-              <span class="report-open">Open</span>
-            </span>
+                  data-title="Glycemic first-line signals">
+            <img src="report-thumbnails/glycemic-risk-factors.png" alt="Glycemic measures are the clearest first-line signals" loading="lazy">
+          </button>
+
+          <button class="report-card" type="button"
+                  data-report="3. What are the key sales trends and revenue drivers over time, and which products, customers, and countries contribute the most to overall business perf.html"
+                  data-title="Near-term account opportunity">
+            <img src="report-thumbnails/sales-opportunity.png" alt="A few accounts and categories driving near-term opportunity" loading="lazy">
           </button>
         </div>
 
@@ -945,15 +774,14 @@
     <p class="footer-copy">
       © 2026 <a href="https://www.zingworks.co/" target="_blank" rel="noopener">ZingWorks</a>. All Rights Reserved.
     </p>
-    <p class="footer-note">
-      *Each email address is entitled to 5 free queries. InsightBot processes your data securely and does not
-      store it after the session. This pass expires on Oct 31, 2026.
+    <p class="footer-note" id="offer-terms">
+      *Each email address is entitled to 5 free queries. InsightBot processes your data securely. This pass expires on Oct 31, 2026.
     </p>
   </footer>
 
   <div class="cta-bar">
     <div class="cta-inner">
-      <p class="cta-note"><b>Dreamforce 2026 offer</b> — 5 free queries, $250 value</p>
+      <p class="cta-note"><b>Limited time offer</b> — 5 free queries, $250 value</p>
       <a class="cta" href="https://zingworks.co/insightbot/claim">Claim my 5 free queries</a>
     </div>
   </div>
