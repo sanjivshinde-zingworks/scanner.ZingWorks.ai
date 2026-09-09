@@ -705,8 +705,38 @@
         border-radius: 0;
       }
 
+      .viewer-bar {
+        flex-wrap: wrap;
+        gap: 8px 10px;
+        padding: 10px 12px;
+      }
+
+      .viewer-titles {
+        flex: 1 1 calc(100% - 120px);
+        min-width: 0;
+      }
+
       .viewer-title {
         font-size: 13px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .viewer-nav {
+        margin-left: auto;
+      }
+
+      .viewer-count {
+        font-size: 12px;
+      }
+
+      .viewer-dots {
+        padding: 6px 12px;
+      }
+
+      .viewer-body iframe {
+        overflow-x: hidden;
       }
     }
 

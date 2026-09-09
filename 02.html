@@ -29,7 +29,72 @@ blockquote{margin:12px 0;padding:12px 16px;background:var(--light);border-left:4
 .report-footer{border-top:1px solid #dce5f0;padding:16px 34px 19px;color:#748095;font-size:12.5px;display:flex;justify-content:space-between;gap:12px;background:#fbfcfe}
 @media(max-width:700px){body{padding:0;background:#fff}.report-shell{border-radius:0;box-shadow:none}.report-topbar{padding:16px 20px;align-items:flex-start;flex-direction:column;gap:3px}.report-content{padding:25px 20px 34px}.title{font-size:27px!important}h1:not(.title){font-size:20px}table{display:block;overflow-x:auto;white-space:normal}.report-footer{padding:14px 20px;flex-direction:column}}
 @media print{@page{size:A4;margin:15mm}html,body{background:#fff}body{padding:0}.report-shell{box-shadow:none;border-radius:0;width:100%;overflow:visible}.report-topbar{background:#003DA5!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;padding:12px 18px}.report-content{padding:18px 0 0}.report-footer{display:none}.title{font-size:25px!important}h1:not(.title){font-size:18px;page-break-after:avoid}h2,h3{page-break-after:avoid}p,li{font-size:11px}table{font-size:10px;page-break-inside:auto}thead{display:table-header-group}tr{page-break-inside:avoid}th{background:#003DA5!important;color:#fff!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}table.callout{background:#EEF4FB!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}img,figure{page-break-inside:avoid}}
-</style></head>
+</style><style id="zw-responsive">
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+}
+body {
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+}
+.mck-report-container,
+.report-shell,
+.report-content {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+}
+img, svg, canvas, figure {
+  max-width: 100% !important;
+  height: auto !important;
+}
+@media (max-width: 720px) {
+  body {
+    padding: 12px 14px 28px !important;
+    font-size: 16px !important;
+    line-height: 1.55 !important;
+  }
+  .report-content { padding: 18px 16px 32px !important; }
+  .report-topbar {
+    padding: 14px 16px !important;
+    flex-wrap: wrap !important;
+    gap: 4px !important;
+  }
+  h1, h1.title, .title, .mck-title {
+    font-size: 1.35rem !important;
+    line-height: 1.25 !important;
+    overflow-wrap: anywhere !important;
+  }
+  h2, .mck-section-title { font-size: 1.12rem !important; }
+  h3 { font-size: 1.02rem !important; }
+  p, li, .note, .section-intro { font-size: 15px !important; }
+  .callout, table.callout td { font-size: 15px !important; }
+  table, .header-meta, .mck-header-top-table, .mck-insight-table {
+    width: 100% !important;
+    max-width: 100% !important;
+    table-layout: fixed !important;
+    font-size: 13px !important;
+  }
+  th, td {
+    white-space: normal !important;
+    word-break: break-word !important;
+    overflow-wrap: anywhere !important;
+    padding: 6px 7px !important;
+  }
+  .header-meta td,
+  .mck-header-top-table td {
+    display: block !important;
+    width: 100% !important;
+    text-align: left !important;
+    white-space: normal !important;
+  }
+  * { min-width: 0 !important; }
+}
+</style>
+</head>
 <body><div class="report-shell"><div class="report-topbar"><div class="brand">InsightBot · Deep Analysis</div><div class="function">Sales opportunity</div></div><main class="report-content">
 <header id="title-block-header">
 <h1 class="title">Which products should sales teams prioritize based on
