@@ -154,8 +154,7 @@
       align-items: center;
       justify-content: center;
       width: 100%;
-      padding: 20px 20px 18px;
-      overflow: hidden;
+      padding: 10px 20px;
     }
 
     .page::before {
@@ -174,11 +173,8 @@
     .card {
       position: relative;
       width: min(1060px, 100%);
-      align-self: stretch;
-      display: flex;
-      flex-direction: column;
       overflow: hidden;
-      padding: 28px 32px 22px;
+      padding: 16px 32px 12px;
       border: 1px solid rgba(3, 45, 96, 0.10);
       border-radius: 22px;
       background: var(--surface);
@@ -191,9 +187,8 @@
     /* ---------- hero ---------- */
 
     .hero {
-      flex: none;
       text-align: center;
-      padding-bottom: 4px;
+      padding-bottom: 0;
     }
 
     h1 {
@@ -217,18 +212,21 @@
     }
 
     .subhead {
-      max-width: 64ch;
-      margin: 10px auto 0;
+      display: inline-block;
+      max-width: 52ch;
+      margin: 6px 12px 0 0;
       color: var(--ink-500);
       font-size: clamp(14px, 1.45vw, 16px);
-      line-height: 1.55;
+      line-height: 1.45;
+      vertical-align: middle;
     }
 
     .offer {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      margin-top: 12px;
+      margin-top: 6px;
+      vertical-align: middle;
     }
 
     .offer .value {
@@ -243,11 +241,14 @@
     }
 
     .offer-kicker {
-      margin-top: 6px;
+      display: inline;
+      margin-top: 0;
+      margin-left: 8px;
       color: #6b7b8c;
       font-size: 10.5px;
       font-weight: 500;
       letter-spacing: .01em;
+      vertical-align: middle;
     }
 
     .offer-kicker a {
@@ -279,18 +280,13 @@
     }
 
     .reports {
-      flex: 1 1 0;
-      min-height: 0;
       overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      margin-top: 20px;
-      padding-top: 16px;
+      margin-top: 10px;
+      padding-top: 10px;
       border-top: 1px solid var(--divider);
     }
 
     .reports-head {
-      flex: none;
       display: flex;
       align-items: flex-end;
       justify-content: space-between;
@@ -336,8 +332,6 @@
     }
 
     .carousel-track {
-      flex: 1 1 0;
-      min-height: 0;
       display: flex;
       flex-wrap: nowrap;
       gap: 12px;
@@ -360,6 +354,7 @@
 
     .report-card {
       flex: 0 0 auto;
+      width: clamp(220px, 22vw, 290px);
       min-width: 0;
       overflow: hidden;
       padding: 0;
@@ -401,7 +396,6 @@
     }
 
     .carousel-foot {
-      flex: none;
       display: flex;
       align-items: center;
       gap: 12px;
@@ -438,7 +432,12 @@
     /* ---------- footer ---------- */
 
     .site-footer {
-      width: min(1060px, calc(100% - 40px));
+      position: relative;
+      z-index: 6;
+      width: 100%;
+      background: rgba(243, 248, 253, 0.92);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
       margin: 0 auto;
       padding: 12px 32px 18px;
       color: var(--muted);
@@ -480,7 +479,7 @@
     }
 
     .footer-links a {
-      color: var(--brand-violet);
+      color: var(--accent-600);
       font-weight: 600;
     }
 
@@ -492,7 +491,7 @@
 
     .footer-links a:hover,
     .footer-links a:focus-visible {
-      color: var(--brand-violet);
+      color: var(--accent);
       text-decoration: underline;
     }
 
