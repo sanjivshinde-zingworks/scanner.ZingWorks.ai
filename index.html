@@ -714,7 +714,7 @@
       .carousel-track {
         flex: 1 1 auto;
         min-height: 0;
-        align-items: stretch;
+        align-items: flex-start;
         gap: 0;
         width: 100%;
       }
@@ -724,19 +724,18 @@
         width: 100%;
         min-width: 100%;
         max-width: 100%;
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        height: auto;
+        display: block;
         scroll-snap-align: start;
         scroll-snap-stop: always;
       }
 
       .report-card img {
-        width: 100%;
-        max-width: 100%;
-        height: auto;
-        max-height: 100%;
+        display: block;
+        width: 100% !important;
+        max-width: 100% !important;
+        height: auto !important;
+        max-height: none !important;
         aspect-ratio: 1122 / 1402;
         object-fit: contain;
         object-position: top center;
@@ -1022,6 +1021,19 @@
         dots.forEach((dot, i) => dot.classList.toggle("is-active", i === active));
       };
 
+      const fillCardWidth = () => {
+        const width = track.clientWidth;
+        if (!width) return;
+        slides.forEach((card) => {
+          const img = card.querySelector("img");
+          if (!img) return;
+          img.style.width = width + "px";
+          img.style.maxWidth = "100%";
+          img.style.height = "auto";
+          img.style.maxHeight = "none";
+        });
+      };
+
       const offsetOf = (el) => el.offsetLeft - track.offsetLeft;
 
       function silentJump(index) {
@@ -1177,6 +1189,13 @@
       });
 
       startAutoplay();
+      fillCardWidth();
+      window.addEventListener("resize", fillCardWidth);
+      window.addEventListener("orientationchange", fillCardWidth);
+      slides.forEach((card) => {
+        const img = card.querySelector("img");
+        if (img && !img.complete) img.addEventListener("load", fillCardWidth, { once: true });
+      });
     })();
   </script>
 </body>
