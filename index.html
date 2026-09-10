@@ -37,6 +37,11 @@
       padding: 0;
     }
 
+    html {
+      height: 100%;
+      overflow: hidden;
+    }
+
     html, body {
       max-width: 100%;
       overflow-x: hidden;
@@ -47,8 +52,9 @@
     body {
       display: flex;
       flex-direction: column;
-      min-height: 100vh;
-      min-height: 100dvh;
+      height: 100vh;
+      height: 100dvh;
+      overflow: hidden;
       padding-bottom: calc(var(--cta-bar-height) + env(safe-area-inset-bottom, 0px));
       background: var(--bg);
       color: var(--ink);
@@ -142,12 +148,14 @@
 
     .page {
       position: relative;
-      flex: 1 0 auto;
+      flex: 1 1 0;
+      min-height: 0;
       display: flex;
       align-items: center;
       justify-content: center;
       width: 100%;
       padding: 20px 20px 18px;
+      overflow: hidden;
     }
 
     .page::before {
@@ -166,6 +174,10 @@
     .card {
       position: relative;
       width: min(1060px, 100%);
+      align-self: stretch;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
       padding: 28px 32px 22px;
       border: 1px solid rgba(3, 45, 96, 0.10);
       border-radius: 22px;
@@ -179,6 +191,7 @@
     /* ---------- hero ---------- */
 
     .hero {
+      flex: none;
       text-align: center;
       padding-bottom: 4px;
     }
@@ -266,12 +279,18 @@
     }
 
     .reports {
+      flex: 1 1 0;
+      min-height: 0;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
       margin-top: 20px;
       padding-top: 16px;
       border-top: 1px solid var(--divider);
     }
 
     .reports-head {
+      flex: none;
       display: flex;
       align-items: flex-end;
       justify-content: space-between;
@@ -317,6 +336,8 @@
     }
 
     .carousel-track {
+      flex: 1 1 0;
+      min-height: 0;
       display: flex;
       flex-wrap: nowrap;
       gap: 12px;
@@ -380,6 +401,7 @@
     }
 
     .carousel-foot {
+      flex: none;
       display: flex;
       align-items: center;
       gap: 12px;
@@ -1188,8 +1210,8 @@
   <footer class="site-footer" id="offer-terms">
     <hr class="footer-rule">
     <nav class="footer-links" aria-label="Legal and support">
-      <a href="https://www.zingworks.co/terms-conditions" target="_blank" rel="noopener">Terms of Service</a>
-      <a href="https://www.zingworks.co/privacy-policy" target="_blank" rel="noopener">Privacy</a>
+      <a href="https://insightbot.zingworks.ai/terms" target="_blank" rel="noopener">Terms of Service</a>
+      <a href="https://insightbot.zingworks.ai/privacy" target="_blank" rel="noopener">Privacy</a>
     </nav>
     <p class="footer-copy">
       © 2026 <a href="https://www.zingworks.co/" target="_blank" rel="noopener">ZingWorks</a>. All Rights Reserved.
