@@ -325,12 +325,12 @@
 
     .report-card img {
       display: block;
-      width: auto;
+      width: 100%;
       height: auto;
       max-width: 100%;
       max-height: clamp(200px, calc(100dvh - 492px), 470px);
-      aspect-ratio: 1122 / 1402;
-      object-fit: contain;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
       object-position: top center;
     }
 
@@ -734,12 +734,12 @@
 
       .report-card img {
         display: block;
-        width: auto;
+        width: 100%;
         max-width: 100%;
-        height: auto;
+        height: 100%;
         max-height: 100%;
-        aspect-ratio: 1122 / 1402;
-        object-fit: contain;
+        aspect-ratio: auto;
+        object-fit: cover;
         object-position: top center;
         border-radius: 10px;
       }
@@ -894,37 +894,37 @@
           <button class="report-card" type="button"
                   data-report="01.html"
                   data-title="Late-year sales momentum accelerated sharply through November">
-            <img src="report-thumbnails/01.png" width="1122" height="1402" alt="Late-year sales momentum accelerated sharply through November" loading="eager" decoding="async">
+            <img src="report-thumbnails/01.webp" width="900" height="1125" alt="Late-year sales momentum accelerated sharply through November" loading="eager" fetchpriority="high" decoding="async">
           </button>
 
           <button class="report-card" type="button"
                   data-report="02.html"
                   data-title="The best product opportunities combine value, demand, and sales quality">
-            <img src="report-thumbnails/02.png" width="1122" height="1402" alt="The best product opportunities combine value, demand, and sales quality" loading="lazy" decoding="async">
+            <img src="report-thumbnails/02.webp" width="900" height="1125" alt="The best product opportunities combine value, demand, and sales quality" loading="lazy" decoding="async">
           </button>
 
           <button class="report-card" type="button"
                   data-report="03.html"
                   data-title="High-value and high-volume products are not the same commercial signal">
-            <img src="report-thumbnails/03.png" width="1122" height="1402" alt="High-value and high-volume products are not the same commercial signal" loading="lazy" decoding="async">
+            <img src="report-thumbnails/03.webp" width="900" height="1125" alt="High-value and high-volume products are not the same commercial signal" loading="lazy" decoding="async">
           </button>
 
           <button class="report-card" type="button"
                   data-report="04.html"
                   data-title="Sales performance is broad across the product portfolio">
-            <img src="report-thumbnails/04.png" width="1122" height="1402" alt="Sales performance is broad across the product portfolio" loading="lazy" decoding="async">
+            <img src="report-thumbnails/04.webp" width="900" height="1125" alt="Sales performance is broad across the product portfolio" loading="lazy" decoding="async">
           </button>
 
           <button class="report-card" type="button"
                   data-report="06.html"
                   data-title="Operational exposure peaks in the early evening">
-            <img src="report-thumbnails/06.png" width="1122" height="1402" alt="Operational exposure peaks in the early evening" loading="lazy" decoding="async">
+            <img src="report-thumbnails/06.webp" width="900" height="1125" alt="Operational exposure peaks in the early evening" loading="lazy" decoding="async">
           </button>
 
           <button class="report-card" type="button"
                   data-report="07.html"
                   data-title="Glycemic measures are the clearest first-line signals">
-            <img src="report-thumbnails/07.png" width="1122" height="1402" alt="Glycemic measures are the clearest first-line signals" loading="lazy" decoding="async">
+            <img src="report-thumbnails/07.webp" width="900" height="1125" alt="Glycemic measures are the clearest first-line signals" loading="lazy" decoding="async">
           </button>
         </div>
 
@@ -1027,20 +1027,15 @@
         const boxW = track.clientWidth;
         const boxH = track.clientHeight;
         if (!boxW || !boxH) return;
-        const ratio = 1122 / 1402;
-        let width = boxW;
-        let height = width / ratio;
-        if (height > boxH) {
-          height = boxH;
-          width = height * ratio;
-        }
         slides.forEach((card) => {
           const img = card.querySelector("img");
           if (!img) return;
-          img.style.width = Math.floor(width) + "px";
-          img.style.height = Math.floor(height) + "px";
+          img.style.width = boxW + "px";
+          img.style.height = boxH + "px";
           img.style.maxWidth = "100%";
           img.style.maxHeight = "100%";
+          img.style.objectFit = "cover";
+          img.style.objectPosition = "top center";
         });
       };
 
