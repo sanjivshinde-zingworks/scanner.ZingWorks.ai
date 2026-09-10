@@ -280,15 +280,18 @@
       gap: 12px;
       width: 100%;
       min-width: 0;
-      padding-bottom: 4px;
       overflow-x: auto;
+      overflow-y: hidden;
       scroll-snap-type: x mandatory;
       scroll-behavior: auto;
       scrollbar-width: none;
+      -ms-overflow-style: none;
       overscroll-behavior-x: contain;
     }
 
     .carousel-track::-webkit-scrollbar {
+      width: 0;
+      height: 0;
       display: none;
     }
 
@@ -325,12 +328,12 @@
 
     .report-card img {
       display: block;
-      width: 100%;
+      width: auto;
       height: auto;
       max-width: 100%;
       max-height: clamp(200px, calc(100dvh - 492px), 470px);
       aspect-ratio: 4 / 5;
-      object-fit: cover;
+      object-fit: contain;
       object-position: top center;
     }
 
@@ -717,6 +720,8 @@
         align-items: center;
         gap: 0;
         width: 100%;
+        overflow-x: auto;
+        overflow-y: hidden;
       }
 
       .report-card {
@@ -728,18 +733,19 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        overflow: hidden;
         scroll-snap-align: start;
         scroll-snap-stop: always;
       }
 
       .report-card img {
         display: block;
-        width: 100%;
+        width: auto;
         max-width: 100%;
-        height: 100%;
+        height: auto;
         max-height: 100%;
-        aspect-ratio: auto;
-        object-fit: cover;
+        aspect-ratio: 4 / 5;
+        object-fit: contain;
         object-position: top center;
         border-radius: 10px;
       }
@@ -1027,15 +1033,21 @@
         const boxW = track.clientWidth;
         const boxH = track.clientHeight;
         if (!boxW || !boxH) return;
+        const ratio = 4 / 5;
+        let width = boxW;
+        let height = width / ratio;
+        if (height > boxH) {
+          height = boxH;
+          width = height * ratio;
+        }
         slides.forEach((card) => {
           const img = card.querySelector("img");
           if (!img) return;
-          img.style.width = boxW + "px";
-          img.style.height = boxH + "px";
+          img.style.width = Math.floor(width) + "px";
+          img.style.height = Math.floor(height) + "px";
           img.style.maxWidth = "100%";
           img.style.maxHeight = "100%";
-          img.style.objectFit = "cover";
-          img.style.objectPosition = "top center";
+          img.style.objectFit = "contain";
         });
       };
 
