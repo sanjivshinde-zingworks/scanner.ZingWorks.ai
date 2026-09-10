@@ -652,15 +652,14 @@
 
     @media (max-width: 1100px) {
       html, body {
-        height: auto;
-        max-height: none;
-        overflow-x: hidden;
-        overflow-y: auto;
+        height: 100svh;
+        max-height: 100svh;
+        overflow: hidden;
       }
 
       body {
         min-height: 100svh;
-        max-height: none;
+        max-height: 100svh;
       }
 
       .site-header,
@@ -669,47 +668,60 @@
       }
 
       .site-header {
-        padding: 10px 16px;
+        padding: 8px 16px;
       }
 
       .page {
-        flex: 0 0 auto;
-        align-items: flex-start;
+        flex: 1 1 auto;
+        align-items: stretch;
+        min-height: 0;
         width: 100%;
         max-width: 100%;
-        padding: 4px 12px 12px;
-        overflow: visible;
+        padding: 4px 12px 8px;
+        overflow: hidden;
       }
 
       .card {
-        display: block;
+        display: flex;
+        flex-direction: column;
         width: calc(100vw - 24px);
         max-width: calc(100vw - 24px);
-        height: auto;
-        max-height: none;
+        height: 100%;
+        min-height: 0;
         margin-inline: auto;
-        padding: 18px 16px 14px;
-        overflow: visible;
+        padding: 14px 14px 12px;
+        overflow: hidden;
         border: 1px solid var(--divider);
         border-radius: 16px;
         box-shadow: var(--shadow-md);
       }
 
-      .hero h1 { font-size: 22px; }
+      .hero {
+        flex: none;
+      }
+
+      .hero h1 { font-size: 20px; }
       .subhead {
         display: block;
-        margin-top: 6px;
+        margin-top: 4px;
         font-size: 13px;
       }
-      .offer { margin-top: 8px; }
+      .offer { margin-top: 6px; }
+      .reports-head {
+        flex: none;
+      }
       .reports-head h2 {
         display: block;
         font-size: 16px;
       }
 
       .reports {
-        margin-top: 14px;
-        padding-top: 14px;
+        display: flex;
+        flex-direction: column;
+        flex: 1 1 auto;
+        min-height: 0;
+        margin-top: 10px;
+        padding-top: 10px;
       }
 
       .carousel-controls {
@@ -717,7 +729,9 @@
       }
 
       .carousel-track {
-        align-items: stretch;
+        flex: 1 1 auto;
+        min-height: 0;
+        align-items: center;
         gap: 0;
         width: 100%;
         overflow-x: auto;
@@ -729,8 +743,10 @@
         width: 100%;
         min-width: 100%;
         max-width: 100%;
-        height: auto;
-        display: block;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         overflow: hidden;
         scroll-snap-align: start;
         scroll-snap-stop: always;
@@ -738,10 +754,10 @@
 
       .report-card img {
         display: block;
-        width: 100%;
+        width: auto;
         max-width: 100%;
         height: auto;
-        max-height: none;
+        max-height: 100%;
         aspect-ratio: 4 / 5;
         object-fit: contain;
         object-position: top center;
@@ -749,7 +765,8 @@
       }
 
       .carousel-foot {
-        margin-top: 8px;
+        flex: none;
+        margin-top: 6px;
       }
 
       .carousel-hint {
@@ -759,13 +776,13 @@
 
       .site-footer {
         width: calc(100% - 24px);
-        padding-bottom: 8px;
+        padding-bottom: 6px;
       }
 
       .footer-note {
         display: block;
         font-size: 10px;
-        line-height: 1.4;
+        line-height: 1.35;
       }
 
       .viewer {
