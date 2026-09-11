@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Executive Summary: Top Sales-Order Routes, Customers, and Products</title>
+  <style>
+    :root {
+      --blue: #0b4aab;
+      --blue-dark: #173968;
+      --blue-text: #174a8b;
+      --text: #1f2b3a;
+      --muted: #5e6877;
+      --border: #bdcfe6;
+      --shade: #eef4fb;
+      --callout: #f3f6fa;
+      --bg: #ffffff;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background: #f5f7fa;
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .report {
+      width: min(1100px, calc(100% - 32px));
+      margin: 28px auto;
+      background: var(--bg);
+      padding: 42px 46px 56px;
+      box-shadow: 0 1px 8px rgba(20, 38, 65, .08);
+    }
+
+    .eyebrow-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: baseline;
+      margin-bottom: 16px;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .eyebrow-row strong { color: var(--blue); }
+
+    h1 {
+      margin: 0 0 12px;
+      color: var(--blue);
+      font-size: clamp(28px, 4vw, 38px);
+      line-height: 1.08;
+      letter-spacing: -.2px;
+    }
+
+    .subtitle {
+      margin: 0 0 8px;
+      color: #4e5968;
+      font-size: 15px;
+    }
+
+    .report-type {
+      margin: 0 0 34px;
+      color: #4e5968;
+    }
+
+    .section-title {
+      color: var(--blue);
+      font-size: 22px;
+      line-height: 1.2;
+      margin: 34px 0 16px;
+      padding-bottom: 7px;
+      border-bottom: 3px solid var(--blue);
+    }
+
+    .subheading {
+      color: var(--blue-text);
+      font-size: 16px;
+      margin: 18px 0 8px;
+    }
+
+    .question {
+      margin: -3px 0 11px;
+      color: #636b76;
+      font-size: 13px;
+    }
+
+    p { margin: 8px 0 12px; }
+
+    ul { margin: 6px 0 4px 22px; padding: 0; }
+    li { margin: 8px 0; }
+
+    .table-wrap {
+      width: 100%;
+      overflow-x: auto;
+      margin: 10px 0 16px;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      min-width: 680px;
+      font-size: 13px;
+    }
+
+    th {
+      background: var(--blue);
+      color: #fff;
+      text-align: left;
+      padding: 9px 12px;
+      border: 1px solid var(--blue);
+      font-weight: 700;
+    }
+
+    td {
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+      vertical-align: top;
+      background: #fff;
+    }
+
+    .two-col td:first-child,
+    .two-col th:first-child { width: 36%; }
+
+    .two-col td:first-child {
+      background: var(--shade);
+      color: #173f75;
+      font-weight: 700;
+    }
+
+    .data-table td:first-child { font-weight: 700; }
+    .num { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+
+    .note {
+      background: var(--callout);
+      border-left: 6px solid var(--blue);
+      padding: 12px 15px;
+      margin: 12px 0 15px;
+    }
+
+    .note p:last-child { margin-bottom: 0; }
+
+    details.audit {
+      margin: 8px 0 12px;
+    }
+
+    details.audit summary {
+      cursor: pointer;
+      color: #526174;
+      font-weight: 700;
+      list-style-position: outside;
+      margin-left: 14px;
+    }
+
+    details.audit .note { margin-top: 10px; }
+
+    .muted { color: #677282; }
+
+    .chart-card {
+      border: 1px solid #d9dde4;
+      padding: 22px 28px 25px;
+      margin: 12px 0 24px;
+      background: #fff;
+    }
+
+    .chart-title {
+      color: var(--blue-dark);
+      font-weight: 700;
+      font-size: 20px;
+      margin: 0 0 0;
+    }
+
+    .chart-subtitle {
+      color: #60708a;
+      margin: 0 0 12px;
+      font-size: 13px;
+    }
+
+    .bar-chart {
+      --label-width: 260px;
+      display: grid;
+      grid-template-columns: var(--label-width) 1fr;
+      column-gap: 12px;
+      row-gap: 10px;
+      align-items: center;
+      margin-top: 10px;
+    }
+
+    .bar-label {
+      text-align: right;
+      color: #333;
+      white-space: normal;
+    }
+
+    .bar-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .bar {
+      height: 24px;
+      min-width: 5px;
+      border-radius: 2px;
+    }
+
+    .bar-value {
+      color: #3c3c3c;
+      white-space: nowrap;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .b1 { background:#3569a8; }
+    .b2 { background:#3e94bb; }
+    .b3 { background:#4ca5a1; }
+    .b4 { background:#6bae67; }
+    .b5 { background:#c7aa36; }
+    .b6 { background:#d48734; }
+    .b7 { background:#c8643c; }
+    .b8 { background:#ae4e6c; }
+    .b9 { background:#9a5a91; }
+    .b10 { background:#8a8a8a; }
+
+    .small-grid {
+      display: grid;
+      grid-template-columns: minmax(190px, 1fr) 2fr;
+      border: 1px solid var(--border);
+      margin-top: 10px;
+    }
+
+    .small-grid > div {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--border);
+    }
+    .small-grid > div:nth-child(odd) {
+      font-weight: 700;
+      background: var(--shade);
+      color: #173f75;
+      border-right: 1px solid var(--border);
+    }
+    .small-grid > div:nth-last-child(-n+2) { border-bottom: 0; }
+
+    .limitation-box {
+      border: 1px solid var(--border);
+      margin-top: 10px;
+    }
+    .limitation-title {
+      background: var(--blue);
+      color: white;
+      font-weight: 700;
+      padding: 9px 12px;
+    }
+    .limitation-box p {
+      margin: 0;
+      padding: 10px 12px;
+      border-top: 1px solid var(--border);
+    }
+
+    .page-break { break-before: page; }
+
+    @media (max-width: 800px) {
+      body { background: #fff; font-size: 14px; }
+      .report {
+        width: 100%;
+        margin: 0;
+        padding: 24px 18px 42px;
+        box-shadow: none;
+      }
+      .eyebrow-row {
+        align-items: flex-start;
+        font-size: 12px;
+      }
+      .section-title { font-size: 20px; }
+      .bar-chart {
+        --label-width: 145px;
+        column-gap: 8px;
+      }
+      .chart-card { padding: 18px 12px; }
+      .bar { height: 20px; }
+    }
+
+    @media (max-width: 540px) {
+      h1 { font-size: 28px; }
+      .eyebrow-row { flex-direction: column; gap: 4px; }
+      .bar-chart {
+        display: block;
+      }
+      .bar-label {
+        text-align: left;
+        margin: 11px 0 4px;
+        font-size: 12px;
+      }
+      .bar-row { width: 100%; }
+      .bar { max-width: calc(100% - 55px); }
+      .small-grid { grid-template-columns: 1fr; }
+      .small-grid > div:nth-child(odd) { border-right: 0; }
+    }
+
+    @media print {
+      @page { size: A4; margin: 15mm; }
+      body { background: #fff; font-size: 10pt; }
+      .report { width: auto; margin: 0; padding: 0; box-shadow: none; }
+      .section-title { break-after: avoid; }
+      .table-wrap, .chart-card, .note { break-inside: avoid; }
+      details.audit > * { display: block; }
+    }
+  </style>
+  <style id="zw-responsive">
+    html {
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+      max-width: 100% !important;
+      overflow-x: hidden !important;
+    }
+
+    body {
+      max-width: 100% !important;
+      overflow-x: hidden !important;
+    }
+
+    .mck-report-container,
+    .report-shell,
+    .report-content,
+    .report {
+      width: 100% !important;
+      max-width: 100% !important;
+      min-width: 0 !important;
+    }
+
+    img, svg, canvas, figure {
+      max-width: 100% !important;
+      height: auto !important;
+    }
+
+    @media (max-width: 720px) {
+      body {
+        padding: 12px 14px 28px !important;
+        font-size: 16px !important;
+        line-height: 1.55 !important;
+      }
+
+      .report {
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 24px 18px 42px !important;
+        box-shadow: none !important;
+      }
+
+      h1 {
+        font-size: 1.35rem !important;
+        line-height: 1.25 !important;
+        overflow-wrap: anywhere !important;
+      }
+
+      h2.section-title { font-size: 1.12rem !important; }
+      h3.subheading { font-size: 1.02rem !important; }
+      p, li, .note { font-size: 15px !important; }
+
+      table {
+        font-size: 13px !important;
+      }
+
+      th, td {
+        white-space: normal !important;
+        word-break: break-word !important;
+        overflow-wrap: anywhere !important;
+      }
+
+      * { min-width: 0 !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="report">
+    <header>
+      <div class="eyebrow-row">
+        <div><strong>FOCUSED ANALYSIS</strong> &nbsp;(9/10/2026)</div>
+        <div>Function: Sales</div>
+      </div>
+      <h1>Executive Summary: Top Sales-Order Routes, Customers, and Products</h1>
+      <p class="subtitle">Which delivery routes and named customers generate the most sales-order value and pounds, and which named products contribute the most sales-order line amount? Customer and product names are resolved from the catalog. 64.69% of sales-order value and 66.99% of sales-order pounds are on orders with no delivery route recorded; rankings by route cover only the 35.31% and 33.01% that have one. All other requested analyses succeeded.</p>
+      <p class="report-type">Report type: Focused Analytical Report</p>
+    </header>
+
+    <section>
+      <h2 class="section-title">1. Report Context and Scope</h2>
+      <div class="table-wrap">
+        <table class="two-col">
+          <thead><tr><th>Element</th><th>Assessment</th></tr></thead>
+          <tbody>
+            <tr><td>Names in this report</td><td>16 delivery routes, 20 customers and 10 products appear in this report.</td></tr>
+            <tr><td>Time period</td><td>All recorded history. No period-over-period comparison was made.</td></tr>
+            <tr><td>Measures used</td><td>order value; Total Pounds; TotalLineAmount</td></tr>
+            <tr><td>Data used</td><td>sales orders; order lines; accounts; products</td></tr>
+            <tr><td>Report date</td><td>10 September 2026</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="subheading">How to read this report</h3>
+      <div class="table-wrap">
+        <table class="two-col">
+          <thead><tr><th>Term</th><th>Meaning</th></tr></thead>
+          <tbody>
+            <tr><td>Order value</td><td>The grand total recorded on each sales order.</td></tr>
+            <tr><td>Line amount</td><td>The value recorded on each invoice line.</td></tr>
+            <tr><td>No value recorded</td><td>The source record left that field blank. Those records still count in every total, but cannot be placed in a group or ranked.</td></tr>
+            <tr><td>Records counted</td><td>How many source records, such as invoice lines or orders, sit behind each figure.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">2. Executive Decision Summary</h2>
+      <h3 class="subheading">Key takeaways</h3>
+      <ul>
+        <li>Madison Metro leads with $392,429, 11.1% of all order value. Together, the 8 delivery routes shown account for 35.3% of all order value.</li>
+        <li>Madison Metro leads with 69,229 lbs, 10.7% of all pounds. Together, the 8 delivery routes shown account for 33.0% of all pounds.</li>
+        <li>Birch Station Co-op leads with $1.93 million, 54.7% of all order value. Together, the 10 customers shown account for 70.6% of all order value.</li>
+        <li>Birch Station Co-op leads with 392,651 lbs, 60.6% of all pounds. Together, the 10 customers shown account for 75.0% of all pounds.</li>
+        <li>Oakfield Kitchen Prairie Whole Bulk Ingredient Classic Basil Pesto leads with $511,496, 14.5% of all line amount. Together, the 10 products shown account for 58.1% of all line amount.</li>
+        <li>Caution: 64.69% of the total (2,277,523.37 of 3,520,534.49) is on records with no delivery route recorded. Rankings and comparisons by delivery route cover only the 35.31% that has one.</li>
+        <li>Caution: 66.99% of the total (434,031.08 of 647,910.60) is on records with no delivery route recorded. Rankings and comparisons by delivery route cover only the 33.01% that has one.</li>
+      </ul>
+
+      <h3 class="subheading">Headline figures</h3>
+      <div class="table-wrap">
+        <table class="two-col">
+          <thead><tr><th>Finding</th><th>Assessment</th></tr></thead>
+          <tbody>
+            <tr><td>Madison Metro</td><td>392,428.63 (Total order value).</td></tr>
+            <tr><td>Madison Metro</td><td>69,229.36 (Total pounds).</td></tr>
+            <tr><td>Oakfield Kitchen Prairie Whole bulk ingredient Classic Basil Pesto</td><td>511,496.36 (Total line amount).</td></tr>
+            <tr><td>Milwaukee East</td><td>226,327.24 (Total order value).</td></tr>
+            <tr><td>Cedar Rapids East</td><td>219,432.96 (Total order value).</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="subheading">Interpretation Boundary</h3>
+      <div class="note">The stored evidence establishes measured values, groupings, filters, rankings, or comparisons that were actually executed. It does not by itself establish causation, customer intent, market demand, operational quality, churn, dissatisfaction, competitive loss, service failure, or other underlying drivers. Measured from 5 stored analysis tables using sales orders; order lines.</div>
+    </section>
+
+    <section>
+      <h2 class="section-title">3. Leaders and Recommended Action</h2>
+      <p><strong>Priority: not assessed.</strong> Priority scoring compares two time periods; this question has no comparison period, so the leaders below are ranked by measured value only.</p>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Rank</th><th>Name</th><th>What was measured</th><th>Value</th><th>Confidence</th></tr></thead>
+          <tbody>
+            <tr><td class="num">#2</td><td>Madison Metro</td><td>Total order value</td><td class="num">392,428.63</td><td>Low</td></tr>
+            <tr><td class="num">#3</td><td>Milwaukee East</td><td>Total order value</td><td class="num">226,327.24</td><td>Low</td></tr>
+            <tr><td class="num">#4</td><td>Cedar Rapids East</td><td>Total order value</td><td class="num">219,432.96</td><td>Low</td></tr>
+            <tr><td class="num">#6</td><td>Minneapolis Metro</td><td>Total order value</td><td class="num">24,377.82</td><td>Low</td></tr>
+            <tr><td class="num">#7</td><td>Duluth North Shore</td><td>Total order value</td><td class="num">20,293.14</td><td>Low</td></tr>
+            <tr><td class="num">#8</td><td>La Crosse River</td><td>Total order value</td><td class="num">13,743.88</td><td>Low</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Recommended action:</strong> review each leader with its accountable owner and confirm whether its rank holds in the next period.</p>
+      <div class="note">64.69% of the total (2,277,523.37 of 3,520,534.49) is on records with no delivery route recorded. Rankings and comparisons by delivery route cover only the 35.31% that has one.</div>
+    </section>
+
+    <section>
+      <h2 class="section-title">4. Evidence Tables</h2>
+
+      <article>
+        <h3 class="subheading">Total order value by delivery route</h3>
+        <p class="question">Which delivery routes generate the most sales-order value?</p>
+        <p>Madison Metro leads with $392,429, 11.1% of all order value. That is 1.7 times the next delivery route, Milwaukee East ($226,327). Together, the 8 delivery routes shown account for 35.3% of all order value.</p>
+        <div class="note"><strong>What was measured:</strong> Total order value across all orders, by delivery route.</div>
+        <p class="muted">Based on 2,238 orders.</p>
+        <details class="audit" open>
+          <summary>Audit details</summary>
+          <div class="note">64.69% of the total (2,277,523.37 of 3,520,534.49) is on records with no delivery route recorded. Rankings and comparisons by delivery route cover only the 35.31% that has one.</div>
+        </details>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead><tr><th>Name</th><th>What was measured</th><th>Value</th><th>Orders counted</th></tr></thead>
+            <tbody>
+              <tr><td>Madison Metro</td><td>Total order value</td><td class="num">392,428.63</td><td class="num">878</td></tr>
+              <tr><td>Milwaukee East</td><td>Total order value</td><td class="num">226,327.24</td><td class="num">270</td></tr>
+              <tr><td>Cedar Rapids East</td><td>Total order value</td><td class="num">219,432.96</td><td class="num">220</td></tr>
+              <tr><td>Minneapolis Metro</td><td>Total order value</td><td class="num">132,070.37</td><td class="num">250</td></tr>
+              <tr><td>Duluth North Shore</td><td>Total order value</td><td class="num">122,642.92</td><td class="num">173</td></tr>
+              <tr><td>La Crosse River</td><td>Total order value</td><td class="num">101,225.31</td><td class="num">176</td></tr>
+              <tr><td>Rockford South</td><td>Total order value</td><td class="num">34,720.43</td><td class="num">52</td></tr>
+              <tr><td>Green Bay Lakes</td><td>Total order value</td><td class="num">14,163.26</td><td class="num">37</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+
+      <article>
+        <h3 class="subheading">Total pounds by delivery route</h3>
+        <p class="question">Which delivery routes generate the most sales-order pounds?</p>
+        <p>Madison Metro leads with 69,229 lbs, 10.7% of all pounds. That is 1.6 times the next delivery route, Cedar Rapids East (42,814 lbs). Together, the 8 delivery routes shown account for 33.0% of all pounds.</p>
+        <div class="note"><strong>What was measured:</strong> Total pounds across all orders, by delivery route.</div>
+        <p class="muted">Based on 2,238 orders.</p>
+        <details class="audit" open>
+          <summary>Audit details</summary>
+          <div class="note">66.99% of the total (434,031.08 of 647,910.60) is on records with no delivery route recorded. Rankings and comparisons by delivery route cover only the 33.01% that has one.</div>
+        </details>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead><tr><th>Name</th><th>What was measured</th><th>Value</th><th>Orders counted</th></tr></thead>
+            <tbody>
+              <tr><td>Madison Metro</td><td>Total pounds</td><td class="num">69,229.36</td><td class="num">878</td></tr>
+              <tr><td>Cedar Rapids East</td><td>Total pounds</td><td class="num">42,813.93</td><td class="num">220</td></tr>
+              <tr><td>Milwaukee East</td><td>Total pounds</td><td class="num">36,771.35</td><td class="num">270</td></tr>
+              <tr><td>Minneapolis Metro</td><td>Total pounds</td><td class="num">24,377.82</td><td class="num">250</td></tr>
+              <tr><td>Duluth North Shore</td><td>Total pounds</td><td class="num">20,293.14</td><td class="num">173</td></tr>
+              <tr><td>La Crosse River</td><td>Total pounds</td><td class="num">13,743.88</td><td class="num">176</td></tr>
+              <tr><td>Rockford South</td><td>Total pounds</td><td class="num">4,318.05</td><td class="num">52</td></tr>
+              <tr><td>Green Bay Lakes</td><td>Total pounds</td><td class="num">2,332.00</td><td class="num">37</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+
+      <article>
+        <h3 class="subheading">Total order value by customer</h3>
+        <p class="question">Which named customers generate the most sales-order value?</p>
+        <p>Birch Station Co-op leads with $1.93 million, 54.7% of all order value. That is 16.6 times the next customer, Meadow View Cafe ($115,864). Together, the 10 customers shown account for 70.6% of all order value.</p>
+        <div class="note"><strong>What was measured:</strong> Total order value across all orders, by customer.</div>
+        <p class="muted">Based on 2,238 orders.</p>
+        <details class="audit" open><summary>Audit details</summary></details>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead><tr><th>Name</th><th>What was measured</th><th>Value</th><th>Orders counted</th></tr></thead>
+            <tbody>
+              <tr><td>Birch Station Co-op</td><td>Total order value</td><td class="num">1,926,614.96</td><td class="num">44</td></tr>
+              <tr><td>Meadow View Cafe</td><td>Total order value</td><td class="num">115,863.92</td><td class="num">12</td></tr>
+              <tr><td>West Terrace Specialty Foods</td><td>Total order value</td><td class="num">74,198.74</td><td class="num">5</td></tr>
+              <tr><td>Juniper Crossing Foods</td><td>Total order value</td><td class="num">68,712.03</td><td class="num">13</td></tr>
+              <tr><td>Juniper Market Wholesale</td><td>Total order value</td><td class="num">59,291.20</td><td class="num">29</td></tr>
+              <tr><td>Grand Works Partners</td><td>Total order value</td><td class="num">56,992.00</td><td class="num">68</td></tr>
+              <tr><td>Juniper Avenue Provisions</td><td>Total order value</td><td class="num">51,707.44</td><td class="num">15</td></tr>
+              <tr><td>Aspen Market Partners</td><td>Total order value</td><td class="num">48,008.04</td><td class="num">40</td></tr>
+              <tr><td>Grove Terrace Supply</td><td>Total order value</td><td class="num">43,090.52</td><td class="num">52</td></tr>
+              <tr><td>Oak Corner Supply</td><td>Total order value</td><td class="num">39,656.39</td><td class="num">42</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+
+      <article>
+        <h3 class="subheading">Total pounds by customer</h3>
+        <p class="question">Which named customers generate the most sales-order pounds?</p>
+        <p>Birch Station Co-op leads with 392,651 lbs, 60.6% of all pounds. That is 14.7 times the next customer, Meadow View Cafe (26,664 lbs). Together, the 10 customers shown account for 75.0% of all pounds.</p>
+        <div class="note"><strong>What was measured:</strong> Total pounds across all orders, by customer.</div>
+        <p class="muted">Based on 2,238 orders.</p>
+        <details class="audit" open><summary>Audit details</summary></details>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead><tr><th>Name</th><th>What was measured</th><th>Value</th><th>Orders counted</th></tr></thead>
+            <tbody>
+              <tr><td>Birch Station Co-op</td><td>Total pounds</td><td class="num">392,651.18</td><td class="num">44</td></tr>
+              <tr><td>Meadow View Cafe</td><td>Total pounds</td><td class="num">26,664.00</td><td class="num">12</td></tr>
+              <tr><td>West Terrace Specialty Foods</td><td>Total pounds</td><td class="num">9,874.70</td><td class="num">5</td></tr>
+              <tr><td>Grand Works Partners</td><td>Total pounds</td><td class="num">9,354.40</td><td class="num">68</td></tr>
+              <tr><td>Aspen Market Partners</td><td>Total pounds</td><td class="num">9,166.88</td><td class="num">40</td></tr>
+              <tr><td>Juniper Crossing Foods</td><td>Total pounds</td><td class="num">8,650.40</td><td class="num">13</td></tr>
+              <tr><td>Oak Corner Supply</td><td>Total pounds</td><td class="num">8,240.10</td><td class="num">42</td></tr>
+              <tr><td>Juniper Avenue Provisions</td><td>Total pounds</td><td class="num">7,830.35</td><td class="num">15</td></tr>
+              <tr><td>Grove Terrace Supply</td><td>Total pounds</td><td class="num">7,616.40</td><td class="num">52</td></tr>
+              <tr><td>Hill Crossing Foods</td><td>Total pounds</td><td class="num">5,953.20</td><td class="num">22</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+
+      <article>
+        <h3 class="subheading">Total line amount by product</h3>
+        <p class="question">Which named products contribute the most sales-order line amount?</p>
+        <p>Oakfield Kitchen Prairie Whole Bulk Ingredient Classic Basil Pesto leads with $511,496, 14.5% of all line amount. Oakfield Kitchen Stonehouse Lemon Herb Marinade is close behind at $388,643. Together, the 10 products shown account for 58.1% of all line amount.</p>
+        <div class="note"><strong>What was measured:</strong> Total line amount across all order lines, by product.</div>
+        <p class="muted">Based on 16,998 order lines.</p>
+        <details class="audit" open><summary>Audit details</summary></details>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead><tr><th>Name</th><th>What was measured</th><th>Value</th><th>Order lines counted</th></tr></thead>
+            <tbody>
+              <tr><td>Oakfield Kitchen Prairie Whole Bulk Ingredient Classic Basil Pesto</td><td>Total line amount</td><td class="num">511,496.36</td><td class="num">38</td></tr>
+              <tr><td>Oakfield Kitchen Stonehouse Lemon Herb Marinade</td><td>Total line amount</td><td class="num">388,642.87</td><td class="num">36</td></tr>
+              <tr><td>Oakfield Kitchen Northfield Caramelized Onion Spread</td><td>Total line amount</td><td class="num">284,443.24</td><td class="num">33</td></tr>
+              <tr><td>Oakfield Kitchen Cellar Korean Bbq Cooking Sauce</td><td>Total line amount</td><td class="num">200,768.48</td><td class="num">28</td></tr>
+              <tr><td>Oakfield Kitchen Foundry Honey Mustard Dressing</td><td>Total line amount</td><td class="num">162,557.61</td><td class="num">30</td></tr>
+              <tr><td>Oakfield Kitchen Hearthside Fire-roasted Tomato Marinara</td><td>Total line amount</td><td class="num">158,136.83</td><td class="num">24</td></tr>
+              <tr><td>Harvest &amp; Hearth Harvest Three-pepper Pizza Sauce</td><td>Total line amount</td><td class="num">106,971.78</td><td class="num">28</td></tr>
+              <tr><td>Oakfield Kitchen Homestead Smoky Chipotle Hot Sauce</td><td>Total line amount</td><td class="num">104,400.76</td><td class="num">23</td></tr>
+              <tr><td>Harvest &amp; Hearth Country Dijon Herb Mustard</td><td>Total line amount</td><td class="num">65,324.12</td><td class="num">696</td></tr>
+              <tr><td>Oakfield Kitchen Harvest Whole Bulk Ingredient Classic Basil Pesto</td><td>Total line amount</td><td class="num">63,391.03</td><td class="num">29</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+    </section>
+
+    <section>
+      <h2 class="section-title">5. Charts</h2>
+
+      <h3 class="subheading">Total order value by delivery route</h3>
+      <div class="chart-card" role="img" aria-label="Horizontal bar chart of total order value by delivery route">
+        <p class="chart-title">Total order value by delivery route</p>
+        <p class="chart-subtitle">Madison Metro leads with $392,429, 11.1% of all order value.</p>
+        <div class="bar-chart">
+          <div class="bar-label">Madison Metro</div><div class="bar-row"><div class="bar b1" style="width:100%"></div><span class="bar-value">$392.4K</span></div>
+          <div class="bar-label">Milwaukee East</div><div class="bar-row"><div class="bar b2" style="width:57.67%"></div><span class="bar-value">$226.3K</span></div>
+          <div class="bar-label">Cedar Rapids East</div><div class="bar-row"><div class="bar b3" style="width:55.92%"></div><span class="bar-value">$219.4K</span></div>
+          <div class="bar-label">Minneapolis Metro</div><div class="bar-row"><div class="bar b4" style="width:33.65%"></div><span class="bar-value">$132.1K</span></div>
+          <div class="bar-label">Duluth North Shore</div><div class="bar-row"><div class="bar b5" style="width:31.25%"></div><span class="bar-value">$122.6K</span></div>
+          <div class="bar-label">La Crosse River</div><div class="bar-row"><div class="bar b6" style="width:25.80%"></div><span class="bar-value">$101.2K</span></div>
+          <div class="bar-label">Rockford South</div><div class="bar-row"><div class="bar b7" style="width:8.85%"></div><span class="bar-value">$34.7K</span></div>
+          <div class="bar-label">Green Bay Lakes</div><div class="bar-row"><div class="bar b8" style="width:3.61%"></div><span class="bar-value">$14.2K</span></div>
+        </div>
+      </div>
+
+      <h3 class="subheading">Total pounds by delivery route</h3>
+      <div class="chart-card" role="img" aria-label="Horizontal bar chart of total pounds by delivery route">
+        <p class="chart-title">Total pounds by delivery route</p>
+        <p class="chart-subtitle">Madison Metro leads with 69,229 lbs, 10.7% of all pounds.</p>
+        <div class="bar-chart">
+          <div class="bar-label">Madison Metro</div><div class="bar-row"><div class="bar b1" style="width:100%"></div><span class="bar-value">69.2K</span></div>
+          <div class="bar-label">Cedar Rapids East</div><div class="bar-row"><div class="bar b2" style="width:61.84%"></div><span class="bar-value">42.8K</span></div>
+          <div class="bar-label">Milwaukee East</div><div class="bar-row"><div class="bar b3" style="width:53.12%"></div><span class="bar-value">36.8K</span></div>
+          <div class="bar-label">Minneapolis Metro</div><div class="bar-row"><div class="bar b4" style="width:35.21%"></div><span class="bar-value">24.4K</span></div>
+          <div class="bar-label">Duluth North Shore</div><div class="bar-row"><div class="bar b5" style="width:29.31%"></div><span class="bar-value">20.3K</span></div>
+          <div class="bar-label">La Crosse River</div><div class="bar-row"><div class="bar b6" style="width:19.85%"></div><span class="bar-value">13.7K</span></div>
+          <div class="bar-label">Rockford South</div><div class="bar-row"><div class="bar b7" style="width:6.24%"></div><span class="bar-value">4.3K</span></div>
+          <div class="bar-label">Green Bay Lakes</div><div class="bar-row"><div class="bar b8" style="width:3.37%"></div><span class="bar-value">2.3K</span></div>
+        </div>
+      </div>
+
+      <h3 class="subheading">Total order value by customer</h3>
+      <div class="chart-card" role="img" aria-label="Horizontal bar chart of total order value by customer">
+        <p class="chart-title">Total order value by customer</p>
+        <p class="chart-subtitle">Birch Station Co-op leads with $1.93 million, 54.7% of all order value.</p>
+        <div class="bar-chart">
+          <div class="bar-label">Birch Station Co-op</div><div class="bar-row"><div class="bar b1" style="width:100%"></div><span class="bar-value">$1.9M</span></div>
+          <div class="bar-label">Meadow View Cafe</div><div class="bar-row"><div class="bar b2" style="width:6.01%"></div><span class="bar-value">$115.9K</span></div>
+          <div class="bar-label">West Terrace Specialty Foods</div><div class="bar-row"><div class="bar b3" style="width:3.85%"></div><span class="bar-value">$74.2K</span></div>
+          <div class="bar-label">Juniper Crossing Foods</div><div class="bar-row"><div class="bar b4" style="width:3.57%"></div><span class="bar-value">$68.7K</span></div>
+          <div class="bar-label">Juniper Market Wholesale</div><div class="bar-row"><div class="bar b5" style="width:3.08%"></div><span class="bar-value">$59.3K</span></div>
+          <div class="bar-label">Grand Works Partners</div><div class="bar-row"><div class="bar b6" style="width:2.96%"></div><span class="bar-value">$57.0K</span></div>
+          <div class="bar-label">Juniper Avenue Provisions</div><div class="bar-row"><div class="bar b7" style="width:2.68%"></div><span class="bar-value">$51.7K</span></div>
+          <div class="bar-label">Aspen Market Partners</div><div class="bar-row"><div class="bar b8" style="width:2.49%"></div><span class="bar-value">$48.0K</span></div>
+          <div class="bar-label">Grove Terrace Supply</div><div class="bar-row"><div class="bar b9" style="width:2.24%"></div><span class="bar-value">$43.1K</span></div>
+          <div class="bar-label">Oak Corner Supply</div><div class="bar-row"><div class="bar b10" style="width:2.06%"></div><span class="bar-value">$39.7K</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">6. Data Confidence and Limitations</h2>
+      <div class="note">This report reflects only analyses explicitly run and stored in this session. It does not establish causation for any observed change unless directly supported by the underlying evidence.</div>
+
+      <div class="table-wrap">
+        <table class="two-col">
+          <thead><tr><th>Confidence Check</th><th>Measured</th></tr></thead>
+          <tbody>
+            <tr><td>Analyses in this report</td><td>5 governed analyses ran and stored evidence.</td></tr>
+            <tr><td>Rows measured versus shown</td><td>46 rows were measured across all analyses. 46 are printed in the tables below. Every measured row is shown.</td></tr>
+            <tr><td>Grouping soundness</td><td>2 grouped results leave 20% or more of the total on records with no group value recorded; comparisons across those groups cover only the recorded share. See the limitations below.</td></tr>
+            <tr><td>Entity name resolution</td><td>29 of 29 entities resolved to a business-readable name.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="small-grid" aria-label="Measurement basis">
+        <div>Measurement basis</div>
+        <div>Values measured from order value; Total Pounds; TotalLineAmount. Sources: sales orders; order lines; accounts; products.</div>
+      </div>
+
+      <div class="limitation-box">
+        <div class="limitation-title">Noted Limitation</div>
+        <p>64.69% of the total (2,277,523.37 of 3,520,534.49) is on records with no delivery route recorded. Rankings and comparisons by delivery route cover only the 35.31% that has one.</p>
+        <p>66.99% of the total (434,031.08 of 647,910.60) is on records with no delivery route recorded. Rankings and comparisons by delivery route cover only the 33.01% that has one.</p>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
